@@ -52,7 +52,6 @@ function hashtag_parser(str){
         }else{
             result[prop] = values[i];
         }
-        
     }
 
     console.log(result);
