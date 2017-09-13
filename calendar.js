@@ -45,10 +45,18 @@ function Calendar(client_id){
         GoogleAuth.signOut();
     }
 
+
+    //two month event from now
+    //max 10 result
     function listUpcomingEvents() {
+        console.log(gapi.client.calendar.events);
+        var currentDate = new Date();
+        var maxDate = new Date();
+        maxDate.setDate(currentDate.getDate()+60);
         gapi.client.calendar.events.list({
             'calendarId': 'primary',
-            'timeMin': (new Date()).toISOString(),
+            'timeMax': maxDate.toISOString(),
+            'timeMin': currentDate.toISOString(),
             'showDeleted': false,
             'singleEvents': true,
             'maxResults': 10,
@@ -63,7 +71,8 @@ function Calendar(client_id){
                     if (!when) {
                         when = event.start.date;
                     }
-                    console.log(event.summary + " " + when);
+                    console.log("event = ", event);
+                    console.log(event.summary + " " + when );
                 }
             } else {
                 console.log('No upcoming events found.');
