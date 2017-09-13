@@ -20,6 +20,11 @@ return an object, example:
 */
 
 function hashtag_parser(str){
+
+    if(!str || str.constructor !== String){
+        return null;
+    }
+
     var result = {};
     var needToRemove = [];
     var properties = [];
@@ -54,6 +59,5 @@ function hashtag_parser(str){
         }
     }
 
-    console.log(result);
     return result;
 }

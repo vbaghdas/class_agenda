@@ -1,17 +1,24 @@
-function Calendar(client_id){
+
+//
+function Calendar(client_id, signIn_button, signOut_button, onloaded){
 
     var CLIENT_ID = null;
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
     var SCOPES = "https://www.googleapis.com/auth/calendar";
-    var auth_button = null;
-    var logout_button = null;
     var GoogleAuth = null;
+    var self = this;
+    this.signIn_button = null;
+    this.signOut_button = null;
+    this.isSignedIn = false;
+    this.currentLoadedEventList = [];
+    this.onloaded = null;
 
     function init(){
         CLIENT_ID = client_id;
         gapi.load('client:auth2', initClient);
-        auth_button = $("#auth_button");
-        logout_button = $("#logout_button");
+        self.signIn_button = signIn_button;
+        self.signOut_button = signOut_button;
+        self.onloaded = onload
     }
 
     function initClient() {
@@ -23,31 +30,37 @@ function Calendar(client_id){
             GoogleAuth = gapi.auth2.getAuthInstance();
             GoogleAuth.isSignedIn.listen(updateSigninStatus);
             updateSigninStatus(GoogleAuth.isSignedIn.get());
-            auth_button.on("click", onAuthButtonClick);
-            logout_button.on("click", onLogoutButtonClick);
+            signIn_button.on("click", onSignInButtonClick);
+            signOut_button.on("click", onSignOutButtonClick);
         });
     }
 
     function updateSigninStatus(isSignedIn){
         if(isSignedIn){
+            self.isSignedIn = true;
             console.log("signed")
             listUpcomingEvents();
         }else{
+            self.isSignedIn = false;
             console.log("not signed");
         }
     }
 
-    function onAuthButtonClick(){
+    function onSignInButtonClick(){
         GoogleAuth.signIn();
     }
 
-    function onLogoutButtonClick(){
+    function onSignOutButtonClick(){
         GoogleAuth.signOut();
     }
 
+    function getEventList(){
+        return self.currentLoadedEventList;
+    }
 
     //two month event from now
     //max 10 result
+    //TODO make an callback as parameter, and execute the callback when finished loaded
     function listUpcomingEvents() {
         console.log(gapi.client.calendar.events);
         var currentDate = new Date();
@@ -71,9 +84,17 @@ function Calendar(client_id){
                     if (!when) {
                         when = event.start.date;
                     }
-                    console.log("event = ", event);
-                    console.log(event.summary + " " + when );
+                    
+                    var description_object = hashtag_parser(event.description);
+                    var loadedEvent = new Event_data();
+                    for(var p in description_object){
+                        if(loadedEvent.hasOwnProperty(p) && description_object[p]){
+                            loadedEvent[p]= description_object[p];
+                        }
+                    }
+                    self.currentLoadedEventList.push(loadedEvent);
                 }
+                onloaded(getEventList());
             } else {
                 console.log('No upcoming events found.');
             }
