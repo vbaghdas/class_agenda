@@ -1,46 +1,58 @@
 /*input example :
-Today's speaker is #name:James#
-whatever i want to write #logo:http://someurl.jpg# hell yes
-#protrait:http://some.jpg#
+
+You can put things like this format : #someProperty:someValue# ,
+for example : #name:James#
+
+Any # doesn't follow that format will just behave like a normal #
+
+You can also use the same property name multiple times, and they will be saved into an array,
+just like this ===> #logo:some.jpg# and #logo:other.jpg# 
+
+And all the others text without that format will just go into description property
 
 return an object, example:
-{
-    description: some description,
-    property1: value1,
-    property2: value2
+[object Object] {
+  description: "some description    some other description  hahahahahah",
+  logo: ["some.jpg", "other.jpg"],
+  name: "James",
+  someProperty: "someValue"
 }
 */
 
 function hashtag_parser(str){
     var result = {};
-    var key = "#";
-    var separator = ":";
-    var hashTagArr = [];
+    var needToRemove = [];
     var properties = [];
     var values = [];
 
-    //maybe we can exclude "#"" with a "/", before we split the str
-    //or change another way to do this without use the split function
-    var arr = str.split(key);
-    var description = [];
-    for(var i = 0; i < arr.length; i++){
-        if(i%2 === 0){
-            description.push(arr[i]);
-        }else{
-            hashTagArr.push(arr[i]);
-        }
+    var regex = /#([^#]*?):(.*?)#/g;
+    var match = null;
+    while(match = regex.exec(str)){
+        needToRemove.push(match[0]);
+        properties.push(match[1]);
+        values.push(match[2])
     }
-    result.description = description.join("");
+    for(var i = 0; i < needToRemove.length; ++i){
+        str = str.replace(needToRemove[i],"");
+    }
 
-    for(var i = 0; i < hashTagArr.length; ++i){
-        var hastagStr = hashTagArr[i];
-        var sIndex = hastagStr.indexOf(separator);
-        properties.push(hastagStr.slice(0,sIndex));
-        values.push(hastagStr.slice(sIndex));
-    }
+    result.description = str;
 
     for(var i = 0; i < properties.length; ++i){
-        result[properties[i]] = values[i];
+        var prop = properties[i];
+        if(result[prop]){
+            if(result[prop].constructor === Array){
+                result[prop].push(values[i]);
+            }else{
+                var arr = [];
+                arr.push(result[prop]);
+                arr.push(values[i]);
+                result[prop] = arr;
+            }
+        }else{
+            result[prop] = values[i];
+        }
+        
     }
 
     console.log(result);
