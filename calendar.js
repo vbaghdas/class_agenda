@@ -12,7 +12,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
     this.isSignedIn = false;
     this.currentLoadedEventList = [];
     this.onloaded = null;
-    this.refreshTime = 60 * 20;//sec
+    this.refreshTime = 20 * 60;//sec
 
     function init(){
         CLIENT_ID = client_id;
@@ -41,7 +41,9 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
             self.isSignedIn = true;
             console.log("signed")
             listUpcomingEvents();
-            setInterval(listUpcomingEvents,self.refreshTime*1000);
+            if(!isNaN(self.refreshTime)){
+                setInterval(listUpcomingEvents,self.refreshTime*1000);
+            }
         }else{
             self.isSignedIn = false;
             console.log("not signed");
