@@ -12,6 +12,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
     this.isSignedIn = false;
     this.currentLoadedEventList = [];
     this.onloaded = null;
+    this.refreshTime = 60 * 20;//sec
 
     function init(){
         CLIENT_ID = client_id;
@@ -40,6 +41,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
             self.isSignedIn = true;
             console.log("signed")
             listUpcomingEvents();
+            setInterval(listUpcomingEvents,self.refreshTime*1000);
         }else{
             self.isSignedIn = false;
             console.log("not signed");
@@ -62,6 +64,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
     //max 10 result
     //TODO make an callback as parameter, and execute the callback when finished loaded
     function listUpcomingEvents() {
+        
         console.log(gapi.client.calendar.events);
         var currentDate = new Date();
         var maxDate = new Date();
@@ -76,7 +79,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
             'orderBy': 'startTime'
         }).then(function(response) {
             var events = response.result.items;
-    
+            self.currentLoadedEventList = [];
             if (events.length > 0) {
                 for (i = 0; i < events.length; i++) {
                     var event = events[i];
