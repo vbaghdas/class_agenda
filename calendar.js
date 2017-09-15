@@ -1,5 +1,4 @@
-
-//
+//the onloaded callback will execute every {refreshTime} seconds
 function Calendar(client_id, signIn_button, signOut_button, onloaded){
 
     var CLIENT_ID = null;
@@ -40,7 +39,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
         if(isSignedIn){
             self.isSignedIn = true;
             console.log("signed")
-            listUpcomingEvents();
+            loadEvents();
             if(!isNaN(self.refreshTime)){
                 setInterval(listUpcomingEvents,self.refreshTime*1000);
             }
@@ -58,14 +57,10 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
         GoogleAuth.signOut();
     }
 
-    function getEventList(){
-        return self.currentLoadedEventList;
-    }
-
     //two month event from now
     //max 10 result
     //TODO make an callback as parameter, and execute the callback when finished loaded
-    function listUpcomingEvents() {
+    function loadEvents() {
         
         console.log(gapi.client.calendar.events);
         var currentDate = new Date();
@@ -99,7 +94,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
                     }
                     self.currentLoadedEventList.push(loadedEvent);
                 }
-                onloaded(getEventList());
+                self.onloaded(self.currentLoadedEventList);
             } else {
                 console.log('No upcoming events found.');
             }

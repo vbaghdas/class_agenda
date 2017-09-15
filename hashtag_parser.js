@@ -42,7 +42,7 @@ function hashtag_parser(str){
     }
 
     result.description = str;
-
+    
     for(var i = 0; i < properties.length; ++i){
         var prop = properties[i];
         if(result[prop]){
