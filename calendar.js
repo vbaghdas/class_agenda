@@ -18,7 +18,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
         gapi.load('client:auth2', initClient);
         self.signIn_button = signIn_button;
         self.signOut_button = signOut_button;
-        self.onloaded = onload
+        self.onloaded = onloaded
     }
 
     function initClient() {
@@ -41,7 +41,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
             console.log("signed")
             loadEvents();
             if(!isNaN(self.refreshTime)){
-                setInterval(listUpcomingEvents,self.refreshTime*1000);
+                setInterval(loadEvents,self.refreshTime*1000);
             }
         }else{
             self.isSignedIn = false;
