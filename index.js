@@ -5,8 +5,10 @@ var calender = null;
 
 function init(){
     calendar = new Calendar(client_id, $("#auth_button"), $("#logout_button"), logCurrentEvent);
+    $("#refresh_button").on("click",calendar.refreshNow);
 }
 
 function logCurrentEvent(eventlist){
+    
     console.log(eventlist);
 }

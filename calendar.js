@@ -1,17 +1,33 @@
 //the onloaded callback will execute every {refreshTime} seconds
+//TODO make the parameter an object will be better?
 function Calendar(client_id, signIn_button, signOut_button, onloaded){
 
     var CLIENT_ID = null;
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
     var SCOPES = "https://www.googleapis.com/auth/calendar";
     var GoogleAuth = null;
+    var interval_id = null;
+    var currentLoadedEventList = [];
     var self = this;
     this.signIn_button = null;
     this.signOut_button = null;
     this.isSignedIn = false;
-    this.currentLoadedEventList = [];
+    this.currentLoadedEventData = [];
     this.onloaded = null;
-    this.refreshTime = 20 * 60;//sec
+    this.calendar_id = "";
+    //how many days gonna load
+    this.loadLength = 90; 
+    this.maxResults = 10;
+    this.refreshTime = 10;//sec
+    this.refreshNow = function(){
+        if(self.isSignedIn){
+            clearInterval(interval_id);
+            if(!isNaN(self.refreshTime)){
+                interval_id = setInterval(loadEvents,self.refreshTime*1000);
+            }
+            loadEvents();
+        }
+    }
 
     function init(){
         CLIENT_ID = client_id;
@@ -19,6 +35,7 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
         self.signIn_button = signIn_button;
         self.signOut_button = signOut_button;
         self.onloaded = onloaded
+        self.calendar_id = "primary";
     }
 
     function initClient() {
@@ -41,10 +58,12 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
             console.log("signed")
             loadEvents();
             if(!isNaN(self.refreshTime)){
-                setInterval(loadEvents,self.refreshTime*1000);
+                interval_id = setInterval(loadEvents,self.refreshTime*1000);
             }
         }else{
             self.isSignedIn = false;
+            self.currentLoadedEventData = [];
+            clearInterval(interval_id);
             console.log("not signed");
         }
     }
@@ -61,43 +80,65 @@ function Calendar(client_id, signIn_button, signOut_button, onloaded){
     //max 10 result
     //TODO make an callback as parameter, and execute the callback when finished loaded
     function loadEvents() {
-        
-        console.log(gapi.client.calendar.events);
         var currentDate = new Date();
         var maxDate = new Date();
-        maxDate.setDate(currentDate.getDate()+60);
+        maxDate.setDate(currentDate.getDate()+self.loadLength);
         gapi.client.calendar.events.list({
-            'calendarId': 'primary',
+            'calendarId': self.calendar_id,
             'timeMax': maxDate.toISOString(),
             'timeMin': currentDate.toISOString(),
             'showDeleted': false,
             'singleEvents': true,
-            'maxResults': 10,
+            'maxResults': self.maxResults,
             'orderBy': 'startTime'
         }).then(function(response) {
             var events = response.result.items;
-            self.currentLoadedEventList = [];
+            self.currentLoadedEventData = [];
             if (events.length > 0) {
                 for (i = 0; i < events.length; i++) {
                     var event = events[i];
-                    var when = event.start.dateTime;
-                    if (!when) {
-                        when = event.start.date;
+                    console.log(event);
+                    var loadedData = new Event_data(event);
+                    self.currentLoadedEventData.push(loadedData);
+                    //for test
+                    /*
+                    if(i == 0){
+                        updateEvent(event.id, "description", "test update again and again");
                     }
-                    
-                    var description_object = hashtag_parser(event.description);
-                    var loadedEvent = new Event_data();
-                    for(var p in description_object){
-                        if(loadedEvent.hasOwnProperty(p) && description_object[p]){
-                            loadedEvent[p]= description_object[p];
-                        }
-                    }
-                    self.currentLoadedEventList.push(loadedEvent);
+                    */
                 }
-                self.onloaded(self.currentLoadedEventList);
             } else {
                 console.log('No upcoming events found.');
             }
+            self.onloaded(self.currentLoadedEventData);
+            
+        });
+    }
+
+    function getEventDataByID(id){
+        var data = self.currentLoadedEventData;
+        for(var i = 0; i < data.length; ++i){
+            if(data[i].id === id){
+                return data[i];
+            }
+        }
+        return null;
+    }
+
+    function updateEvent(eventid, propertyName, value){
+        gapi.client.calendar.events.get({
+            calendarId: self.calendar_id,
+            eventId: eventid
+        }).then(function(response){
+            var event = response.result
+            event[propertyName] = value;
+            gapi.client.calendar.events.update({
+                calendarId : self.calendar_id,
+                eventId: eventid,
+                resource: event
+            }).then(function(response){
+                getEventDataByID(response.result.id)[propertyName] = value;
+            });
         });
     }
 
