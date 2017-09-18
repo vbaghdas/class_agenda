@@ -1,149 +1,106 @@
-//the onloaded callback will execute every {refreshTime} seconds
-//TODO make the parameter an object will be better?
-function Calendar(client_id, signIn_button, signOut_button, onloaded){
+$('document').ready(function(){
+    var cal = new Calendar();
+    cal.generate();
+    applyClickHandlers();
+    inactiveDays();
+});
 
-    var CLIENT_ID = null;
-    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-    var SCOPES = "https://www.googleapis.com/auth/calendar";
-    var GoogleAuth = null;
-    var interval_id = null;
-    var currentLoadedEventList = [];
-    var self = this;
-    this.signIn_button = null;
-    this.signOut_button = null;
-    this.isSignedIn = false;
-    this.currentLoadedEventData = [];
-    this.onloaded = null;
-    this.calendar_id = "";
-    //how many days gonna load
-    this.loadLength = 90; 
-    this.maxResults = 10;
-    this.refreshTime = 10;//sec
-    this.refreshNow = function(){
-        if(self.isSignedIn){
-            clearInterval(interval_id);
-            if(!isNaN(self.refreshTime)){
-                interval_id = setInterval(loadEvents,self.refreshTime*1000);
-            }
-            loadEvents();
+function applyClickHandlers () {
+    $('.calendar').on('click', '.fa-angle-left', function(){
+        var cal = new Calendar(--currentMonth, currentYear);
+        $(".calTable:nth-child(1)").remove();
+        cal.generate();
+        inactiveDays();
+
+    });
+
+    $('.calendar').on('click', '.fa-angle-right', function(){
+        var cal = new Calendar(++currentMonth, currentYear);
+        $(".calTable:nth-child(1)").remove();
+        cal.generate();
+        inactiveDays();
+    });
+}
+
+function inactiveDays () {
+    $('.calDay').map(function(index, date){
+        if (date.innerHTML === ''){
+            return $(date).toggleClass('inactive');
         }
-    }
-
-    function init(){
-        CLIENT_ID = client_id;
-        gapi.load('client:auth2', initClient);
-        self.signIn_button = signIn_button;
-        self.signOut_button = signOut_button;
-        self.onloaded = onloaded
-        self.calendar_id = "primary";
-    }
-
-    function initClient() {
-        gapi.client.init({
-            discoveryDocs: DISCOVERY_DOCS,
-            clientId: CLIENT_ID,
-            scope: SCOPES
-        }).then(function () {
-            GoogleAuth = gapi.auth2.getAuthInstance();
-            GoogleAuth.isSignedIn.listen(updateSigninStatus);
-            updateSigninStatus(GoogleAuth.isSignedIn.get());
-            signIn_button.on("click", onSignInButtonClick);
-            signOut_button.on("click", onSignOutButtonClick);
-        });
-    }
-
-    function updateSigninStatus(isSignedIn){
-        if(isSignedIn){
-            self.isSignedIn = true;
-            console.log("signed")
-            loadEvents();
-            if(!isNaN(self.refreshTime)){
-                interval_id = setInterval(loadEvents,self.refreshTime*1000);
-            }
-        }else{
-            self.isSignedIn = false;
-            self.currentLoadedEventData = [];
-            clearInterval(interval_id);
-            console.log("not signed");
-        }
-    }
-
-    function onSignInButtonClick(){
-        GoogleAuth.signIn();
-    }
-
-    function onSignOutButtonClick(){
-        GoogleAuth.signOut();
-    }
-
-    //two month event from now
-    //max 10 result
-    //TODO make an callback as parameter, and execute the callback when finished loaded
-    function loadEvents() {
-        var currentDate = new Date();
-        var maxDate = new Date();
-        maxDate.setDate(currentDate.getDate()+self.loadLength);
-        gapi.client.calendar.events.list({
-            'calendarId': self.calendar_id,
-            'timeMax': maxDate.toISOString(),
-            'timeMin': currentDate.toISOString(),
-            'showDeleted': false,
-            'singleEvents': true,
-            'maxResults': self.maxResults,
-            'orderBy': 'startTime'
-        }).then(function(response) {
-            var events = response.result.items;
-            self.currentLoadedEventData = [];
-            if (events.length > 0) {
-                for (i = 0; i < events.length; i++) {
-                    var event = events[i];
-                    console.log(event);
-                    var loadedData = new Event_data(event);
-                    self.currentLoadedEventData.push(loadedData);
-                    //for test
-                    /*
-                    if(i == 0){
-                        updateEvent(event.id, "description", "test update again and again");
-                    }
-                    */
-                }
-            } else {
-                console.log('No upcoming events found.');
-            }
-            self.onloaded(self.currentLoadedEventData);
-            
-        });
-    }
-
-    function getEventDataByID(id){
-        var data = self.currentLoadedEventData;
-        for(var i = 0; i < data.length; ++i){
-            if(data[i].id === id){
-                return data[i];
-            }
-        }
-        return null;
-    }
-
-    function updateEvent(eventid, propertyName, value){
-        gapi.client.calendar.events.get({
-            calendarId: self.calendar_id,
-            eventId: eventid
-        }).then(function(response){
-            var event = response.result
-            event[propertyName] = value;
-            gapi.client.calendar.events.update({
-                calendarId : self.calendar_id,
-                eventId: eventid,
-                resource: event
-            }).then(function(response){
-                getEventDataByID(response.result.id)[propertyName] = value;
-            });
-        });
-    }
-
-    init();
+    })
 }
 
 
+var dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+var monthLabels = [
+    'January', 'February', 'March', 'April', 'May',
+    'June', 'July', 'August', 'September',
+    'October', 'November', 'December'
+];
+
+function daysInMonth(year, month) {
+    return (new Date(year, ++month, 0)).getDate();
+}
+
+var currentDate = new Date();
+var currentMonth = currentDate.getMonth();
+var currentYear = currentDate.getFullYear();
+
+function Calendar(month, year) {
+    this.month = (isNaN(month) || month === null) ? currentMonth : month;
+    this.year  = (isNaN(year) || year === null) ? currentYear : year;
+}
+
+Calendar.prototype.generate = function(){
+
+        var firstDay = new Date(this.year, this.month, 1);
+        var startingDay = firstDay.getDay();
+        var monthLength = daysInMonth(this.year, this.month);
+        var monthName = monthLabels[this.month];
+
+        var table = $('<table class="calTable">');
+        var tBody = $('<tbody>');
+        var tableRow = $('<tr class="calMonth">');
+        var colspan = $('<th colspan="7">');
+
+        $('.calendar').append(table);
+        table.append(tBody);
+        tBody.append(tableRow);
+        tableRow.append(colspan);
+
+        var leftArrow = '<i class="fa fa-angle-left" aria-hidden="true"></i>';
+        var rightArrow ='<i class="fa fa-angle-right" aria-hidden="true"></i>';
+        colspan.html(leftArrow + ' ' + monthName + ' ' + this.year + ' ' + rightArrow);
+
+        var calendarHeader = $('<tr class="calHeaderRow">');
+        tBody.append(calendarHeader);
+
+        for(var i = 0; i <= 6; i++ ){
+            var calendarHeaderDay = $('<td class="calHeaderDay">');
+            calendarHeaderDay.text(dayLabels[i]);
+            calendarHeader.append(calendarHeaderDay);
+        }
+
+        var day = 1;
+        var calendarDayRow = '<tr class="calDayRow">';
+
+        for (var i = 0; i < 9; i++) {
+            for (var j = 0; j <= 6; j++) {
+                var calendarDay = '<td class="calDay">';
+
+                if (day <= monthLength && (i > 0 || j >= startingDay)) {
+                    calendarDay += day;
+                    day++;
+                }
+                calendarDayRow += calendarDay;
+            }
+
+            if (day > monthLength) {
+                break;
+            } else {
+                calendarDayRow += '</tr><tr class="calDayRow">';
+            }
+        }
+        tBody.append(calendarDayRow);
+    };
