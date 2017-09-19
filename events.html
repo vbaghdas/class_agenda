@@ -22,10 +22,13 @@
     <!--Jquery Plugin-->
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 
+    <!--Background Animation-->
+    <script src="background.js"></script>
+
     <!--Style Sheet-->
     <link rel="stylesheet" href="style.css">
 
-    <!--Function calls-->
+    <!--Event Script-->
     <script src="events.js"></script>
 
 </head>
@@ -55,7 +58,7 @@
         <div class="eventCard">
             <!-- avatar container -->
             <div class="avatarContainer col-xs-12 col-md-3 col-lg-3">
-                <!--<img class="avatar" src="assets/images/person1.jpg">-->
+                <img class="avatar" src="assets/images/person1.jpg">
             </div>
             <!-- body container -->
             <div class="eventCardBody col-xs-12 col-md-9 col-lg-9">
@@ -77,7 +80,7 @@
         <div class="eventCard">
             <!-- avatar container -->
             <div class="avatarContainer col-xs-12 col-md-3 col-lg-3">
-                <!--<img class="avatar" src="assets/images/person2.jpg">-->
+                <img class="avatar" src="assets/images/person2.jpg">
             </div>
             <!-- body container -->
             <div class="eventCardBody col-xs-12 col-md-9 col-lg-9">
@@ -99,7 +102,7 @@
         <div class="eventCard">
             <!-- avatar container -->
             <div class="avatarContainer col-xs-12 col-md-3 col-lg-3">
-                <!--<img class="avatar" src="assets/images/person3.jpg">-->
+                <img class="avatar" src="assets/images/person3.jpg">
             </div>
             <!-- body container -->
             <div class="eventCardBody col-xs-12 col-md-9 col-lg-9">
@@ -117,6 +120,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="animation-wrap">
+    <canvas id="animation-canvas"></canvas>
 </div>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
