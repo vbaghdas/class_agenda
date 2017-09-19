@@ -18,7 +18,7 @@ function GoogleCalendar(client_id, signIn_button, signOut_button, onloaded){
     //how many days gonna load
     this.loadLength = 90;
     this.maxResults = 10;
-    this.refreshTime = 10;//sec
+    this.refreshTime = 20 * 60;//sec
     this.refreshNow = function(){
         if(self.isSignedIn){
             clearInterval(interval_id);

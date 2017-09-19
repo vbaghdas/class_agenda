@@ -1,10 +1,3 @@
-$('document').ready(function(){
-    var cal = new Calendar();
-    cal.generate();
-    applyClickHandlers();
-    inactiveDays();
-});
-
 function applyClickHandlers () {
     $('.calendar').on('click', '.fa-angle-left', function(){
         var cal = new Calendar(--currentMonth, currentYear);
@@ -29,7 +22,6 @@ function inactiveDays () {
         }
     })
 }
-
 
 var dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
