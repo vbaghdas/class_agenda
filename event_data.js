@@ -4,9 +4,13 @@
 function Event_data(event){
     var self = this;
     this.id = null;
-    this.description = null;
-    this.name = null;
+    this.logo = null;
     this.avatar = null;
+    this.name = null;
+    this.date = null;
+    this.facility = null;
+    this.location = null;
+
 
     function init(){
         //extract from event
@@ -17,6 +21,7 @@ function Event_data(event){
             when = event.start.date;
         }
         */
+
 
         //extract from event description
         var description_object = hashtag_parser(event.description);
