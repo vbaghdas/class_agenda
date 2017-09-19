@@ -6,6 +6,7 @@ function Event_data(event){
     this.id = null;
     this.description = null;
     this.name = null;
+    this.avatar = null;
 
     function init(){
         //extract from event
