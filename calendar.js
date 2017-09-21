@@ -1,10 +1,36 @@
+$(document).ready(init);
+
+var client_id = "3077846337-cirpjmer7f42bk4gmmuamnftgkqpd2f4.apps.googleusercontent.com";
+var googleCalendar = null;
+
+function init(){
+    var cal = new Calendar();
+    cal.generate();
+    applyClickHandlers();
+    inactiveDays();
+    googleCalendar = new GoogleCalendar(client_id, $("#auth_button"), $("#logout_button"), grabData);
+    $("#refresh_button").on("click",googleCalendar.refreshNow);
+}
+
+function grabData(eList){
+    //Passes the replace_template which holds the event data from google calendar.
+    //eList is the multidimensional array coming from google calendar init.
+    //Dynamically output the event with the correct date on the calendar using jQuery.
+    //Give them class names such as avatar, logo, date, and name.
+    console.log( eList );
+    $('.calDay').map(function(index, date){
+        if ($(date).text() === '2'){
+            return $(date).html('2' + eList['0'].date);
+        }
+    })
+}
+
 function applyClickHandlers () {
     $('.calendar').on('click', '.fa-angle-left', function(){
         var cal = new Calendar(--currentMonth, currentYear);
         $(".calTable:nth-child(1)").remove();
         cal.generate();
         inactiveDays();
-
     });
 
     $('.calendar').on('click', '.fa-angle-right', function(){
@@ -17,7 +43,7 @@ function applyClickHandlers () {
 
 function inactiveDays () {
     $('.calDay').map(function(index, date){
-        if (date.innerHTML === ''){
+        if ($(date).text() === ''){
             return $(date).toggleClass('inactive');
         }
     })
@@ -31,13 +57,14 @@ var monthLabels = [
     'October', 'November', 'December'
 ];
 
+var currentDate = new Date();
+var currentDay = currentDate.getDate();
+var currentMonth = currentDate.getMonth();
+var currentYear = currentDate.getFullYear();
+
 function daysInMonth(year, month) {
     return (new Date(year, ++month, 0)).getDate();
 }
-
-var currentDate = new Date();
-var currentMonth = currentDate.getMonth();
-var currentYear = currentDate.getFullYear();
 
 function Calendar(month, year) {
     this.month = (isNaN(month) || month === null) ? currentMonth : month;
@@ -91,7 +118,7 @@ Calendar.prototype.generate = function(){
             if (day > monthLength) {
                 break;
             } else {
-                calendarDayRow += '</tr><tr class="calDayRow">';
+                calendarDayRow += '<tr class="calDayRow">';
             }
         }
         tBody.append(calendarDayRow);

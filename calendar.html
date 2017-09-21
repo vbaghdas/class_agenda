@@ -11,7 +11,7 @@
     <script src="event_data.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="google_calendar.js"></script>
-    <script src="calendar.js"></script>
+    <script src="replace_template.js"></script>
 
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,10 +29,14 @@
     <link rel="stylesheet" href="style.css">
 
     <!--Event Script-->
-    <script src="events.js"></script>
+    <script src="calendar.js"></script>
 </head>
 
 <body>
+
+<button id="auth_button">Auth</button>
+<button id="logout_button">log out</button>
+<button id="refresh_button">refresh</button>
 
 <div class="pos-f-t">
     <div class="collapse" id="navbarToggleExternalContent">
@@ -51,9 +55,9 @@
 
 <div class="calendar"></div>
 
-<div id="animation-wrap">
-    <canvas id="animation-canvas"></canvas>
-</div>
+<!--<div id="animation-wrap">-->
+    <!--<canvas id="animation-canvas"></canvas>-->
+<!--</div>-->
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>

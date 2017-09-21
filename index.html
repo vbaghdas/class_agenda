@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -22,8 +20,15 @@
 
     <!--Style Sheet-->
     <link rel="stylesheet" href="style.css">
+
+    <!--Slider for Style Sheet-->
+    <link rel="stylesheet" href="slider.css">
+
+    <!--Slider-->
+    <script src="slider.js"></script>
+
 </head>
-<body>
+<body style="zoom: 1;">
 
 <div class="pos-f-t">
     <div class="collapse show" id="navbarToggleExternalContent">
@@ -40,21 +45,27 @@
     </nav>
 </div>
 
+<div class="navIconContainer">
+    <div id="carousel">
 
-<div class="navIconContainer container">
-    <div class="row justify-content-center text-center">
-        <div class="navIcon col-xs-12 col-md-6 col-lg-3">
-            <i class="fa fa-home fa-5x" aria-hidden="true"></i>
+        <div class="prev navBut">
+            <div class="navIcon">
+                <a href="about.html"><i class="fa fa-users" aria-hidden="true"></i></a>
+            </div>
         </div>
-        <div class="navIcon col-xs-12 col-md-6 col-lg-3">
-            <a href="calendar.html"><i class="fa fa-calendar fa-5x" aria-hidden="true"></i></a>
+
+        <div class="selected navBut">
+            <div class="navIcon">
+                <a href="events.html"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
+            </div>
         </div>
-        <div class="navIcon col-xs-12 col-md-6 col-lg-3">
-            <a href="events.html"><i class="fa fa-user fa-5x" aria-hidden="true"></i></a>
+
+        <div class="next navBut">
+            <div class="navIcon">
+                <a href="calendar.html"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+            </div>
         </div>
-        <div class="navIcon col-xs-12 col-md-6 col-lg-3">
-            <i class="fa fa-qrcode fa-5x" aria-hidden="true"></i>
-        </div>
+
     </div>
 </div>
 

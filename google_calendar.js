@@ -34,7 +34,7 @@ function GoogleCalendar(client_id, signIn_button, signOut_button, onloaded){
         gapi.load('client:auth2', initClient);
         self.signIn_button = signIn_button;
         self.signOut_button = signOut_button;
-        self.onloaded = onloaded
+        self.onloaded = onloaded;
         self.calendar_id = "primary";
     }
 
@@ -55,7 +55,7 @@ function GoogleCalendar(client_id, signIn_button, signOut_button, onloaded){
     function updateSigninStatus(isSignedIn){
         if(isSignedIn){
             self.isSignedIn = true;
-            console.log("signed")
+            console.log("signed in google auth")
             loadEvents();
             if(!isNaN(self.refreshTime)){
                 interval_id = setInterval(loadEvents,self.refreshTime*1000);
@@ -97,7 +97,7 @@ function GoogleCalendar(client_id, signIn_button, signOut_button, onloaded){
             if (events.length > 0) {
                 for (i = 0; i < events.length; i++) {
                     var event = events[i];
-                    console.log(event);
+                    // console.log(event);
                     var loadedData = new Event_data(event);
                     self.currentLoadedEventData.push(loadedData);
                     //for test

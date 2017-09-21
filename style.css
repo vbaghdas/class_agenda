@@ -34,7 +34,8 @@ a:hover {
     opacity: 0.4;
 }
 
-/*Navigation Container and Button Controls*/
+
+/*Hamburger Position*/
 
 .navHomePage {
     position: absolute;
@@ -42,32 +43,7 @@ a:hover {
     right: 0;
 }
 
-.navIconContainer {
-    margin-top: 10vh;
-}
 
-.navIcon {
-    background-color: rgba(0, 0, 0, 0.7);
-    border: solid rgba(34, 34, 34, 0.9) 10px;
-    text-align: center;
-    height: 300px;
-    max-width: 100%;
-}
-
-.navIcon:hover {
-    transform: scale(1.2, 1.2);
-    transition: transform 0.5s, box-shadow 0.3s;
-    background-color: rgba(0, 0, 0, .8);
-    border: solid rgba(0, 0, 0, 0.9) 14px;
-    color: #5cb7d6;
-    box-shadow: #5cb7d6 0 0 1rem 1rem;
-    z-index: 1;
-}
-.fa-5x {
-    font-size: 15em;
-    margin: auto;
-    padding-top: 25px;
-}
 /*Events Page*/
 
 .eventContainer {
@@ -92,9 +68,10 @@ a:hover {
     overflow: hidden;
 }
 
-    .avatar {
-        height: 100%;
-    }
+.avatar {
+    height: 100%;
+    width: 100%;
+}
 
 .eventCardBody {
     background-color: rgba(34, 34, 34, .9);
@@ -105,25 +82,25 @@ a:hover {
     padding: 12px 15px;
 }
 
-    .companyLogo {
-        height: 40px;
-    }
+.companyLogo {
+    height: 40px;
+}
 
 .eventCardBodyMiddle {
     margin-top: 25px;
 }
 
-    .eventDate {
-        color: #888;
-        font-size: 28px;
-    }
+.eventDate {
+    color: #888;
+    font-size: 28px;
+}
 
-    .eventSpeaker {
-        display: block;
-        margin-top: 10px;
-        font-size: 2em;
-        color: #fff;
-    }
+.eventSpeaker {
+    display: block;
+    margin-top: 10px;
+    font-size: 2em;
+    color: #fff;
+}
 
 .eventCardBodyBottom{
     position: absolute;
@@ -133,16 +110,16 @@ a:hover {
     width: 100%;
 }
 
-    .eventFacility {
-        color: #5cb7d6;
-        font-size: 1.5em;
-    }
+.eventFacility {
+    color: #5cb7d6;
+    font-size: 1.5em;
+}
 
-    .eventLocation{
-        color: #5cb7d6;
-        font-size: 1.5em;
-        float: right;
-    }
+.eventLocation{
+    color: #5cb7d6;
+    font-size: 1.5em;
+    float: right;
+}
 
 
 /*Calendar*/
@@ -181,7 +158,6 @@ tr {
 .calDay:hover {
     transform: scale(2, 2);
     transition: transform 0.5s, box-shadow 0.3s;
-    background-color: rgba(0, 0, 0, .9);
     box-shadow: #5cb7d6 0 0 5px 5px;
     border: 0;
 }
