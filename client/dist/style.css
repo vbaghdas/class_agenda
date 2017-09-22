@@ -1,0 +1,207 @@
+body {
+    background: #222;
+    color: #fff;
+}
+
+a {
+    color: #fff;
+}
+
+a:hover {
+    color: #5cb7d6;
+}
+
+
+/*Background Animation*/
+
+#animation-wrap {
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    transition: background 0.5s;
+    background-color: #222;
+    color: #5cb7d6;
+}
+
+#animation-canvas {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    -webkit-transition: all, 0.6s;
+    opacity: 0.4;
+}
+
+
+/*Hamburger Position*/
+
+.navHomePage {
+    position: absolute;
+    top: 1.5%;
+    right: 0;
+}
+
+
+/*Events Page*/
+
+.eventContainer {
+    width: 80vw;
+}
+
+.eventRow {
+    margin-top: 3vh;
+}
+
+.eventCard {
+    border-radius: 2px;
+    box-shadow: 10px 15px 34px rgba(0, 0, 0, 1);
+    height: 250px;
+    width: 100%;
+}
+
+.avatarContainer {
+    float: left;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.avatar {
+    height: 100%;
+    width: 100%;
+}
+
+.eventCardBody {
+    background-color: rgba(34, 34, 34, .9);
+    /*opacity: .8;*/
+    border-left: 5px solid #5cb7d6;
+    float: left;
+    height: 100%;
+    padding: 12px 15px;
+}
+
+.companyLogo {
+    height: 40px;
+}
+
+.eventCardBodyMiddle {
+    margin-top: 25px;
+}
+
+.eventDate {
+    color: #888;
+    font-size: 28px;
+}
+
+.eventSpeaker {
+    display: block;
+    margin-top: 10px;
+    font-size: 2em;
+    color: #fff;
+}
+
+.eventCardBodyBottom {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    padding: 0 15px;
+    width: 100%;
+}
+
+.eventCardBodyFooter {
+    position: relative;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.eventFacility {
+    color: #5cb7d6;
+    font-size: 1.5em;
+}
+
+.eventLocation{
+    color: #5cb7d6;
+    font-size: 1.5em;
+    float: right;
+}
+
+
+/*Calendar*/
+
+tr {
+    display: flex;
+}
+
+.calTable {
+    max-width: 80vw;
+    margin: 20px auto;
+}
+
+.calMonth {
+    font-size: 2.5rem;
+    color: #5cb7d6;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.calHeaderDay {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    text-align: center;
+}
+
+.calDay{
+    padding: 12px;
+    width: 12vw;
+    height: 17vh;
+    border: solid rgba(34, 34, 34, 0.9) 8px;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.calDay:hover {
+    transform: scale(2, 2);
+    transition: transform 0.5s, box-shadow 0.3s;
+    box-shadow: #5cb7d6 0 0 5px 5px;
+    border: 0;
+}
+
+.inactive {
+    background-color: rgba(99, 108, 114, 0.5);
+}
+
+.fa-angle-left {
+    margin-right: 15px;
+}
+
+.fa-angle-right {
+    margin-left: 15px;
+}
+
+.modal {
+    top: 25%;
+    left: 0;
+}
+
+
+/*Media Queries for Responsiveness*/
+
+@media (max-width: 768px) {
+    .eventCard {
+        height: 50%;
+    }
+    .eventCardBody {
+        height: 50%;
+    }
+    .eventCardBodyBottom {
+        position: relative;
+        padding: 0;
+        margin-top: 30px;
+
+    }
+    .avatarContainer {
+        height: 50%;
+    }
+}
