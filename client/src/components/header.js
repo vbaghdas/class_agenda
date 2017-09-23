@@ -9,7 +9,7 @@ export default () => (
         <div className="collapse show" id="navbarToggleExternalContent">
             <div className="p-4">
                 <Link to="/" className="navbar-brand"><img src={logo}/></Link>
-                <h2 className="text-white text-center">Welcome to the Learning Fuze Portal</h2>
+                <h2 className="text-white text-center">Welcome to the Learning Fuze Dashboard</h2>
                 <h4 className="text-muted text-center">Wave to get started... </h4>
             </div>
         </div>

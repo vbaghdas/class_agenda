@@ -29,6 +29,15 @@
     transition: width 1s, height 1s;
 }
 
+.navIcon > a {
+    color: #fff;
+}
+
+.navIcon > a:hover {
+    color: #5cb7d6;
+}
+
+
 .fa {
     font-size: 6rem;
     top: 25%;
