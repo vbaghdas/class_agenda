@@ -9,23 +9,38 @@ import Calendar from './calendar';
 import About from './about';
 import Background from './background/background';
 
-import { getEvents } from './gcal';
+import GoogleCalendar from './google_calendar';
 
 class App extends Component {
 
     constructor(props){
         super(props);
+        this.onEventLoaded = this.onEventLoaded.bind(this);
+
+        var option = {
+            calendar_id: 'final.project.lfz@gmail.com',
+            api_key: `AIzaSyDTmFMqAgAqD4vq3srRgmA3mRuqz_fAljY`,
+            onloaded : this.onEventLoaded,
+            maxResults: 5,
+            loadLength: 90,
+            refreshTime: 20*60
+        }
+        this.googleCalendar = new GoogleCalendar(option);
+        
 
         this.state = {
             events: []
         }
+        
     }
 
     componentDidMount () {
-        getEvents((events) => {
-            this.setState({events})
-            console.log(events);
-        })
+        this.googleCalendar.load();
+    }
+
+    onEventLoaded(events){
+        this.setState({events});
+        console.log(this.state);
     }
 
     render() {
