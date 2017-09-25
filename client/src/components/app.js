@@ -10,22 +10,15 @@ import About from './about';
 import Background from './background/background';
 
 import GoogleCalendar from './google_calendar';
+import option from './google_calendar_config';
 
+//should make a timer outside the google calendar class
 class App extends Component {
 
     constructor(props){
         super(props);
         this.onEventLoaded = this.onEventLoaded.bind(this);
-
-        var option = {
-            calendar_id: 'final.project.lfz@gmail.com',
-            api_key: `AIzaSyDTmFMqAgAqD4vq3srRgmA3mRuqz_fAljY`,
-            onloaded : this.onEventLoaded,
-            maxResults: 5,
-            loadLength: 90,
-            refreshTime: 20*60
-        }
-        this.googleCalendar = new GoogleCalendar(option);
+        this.googleCalendar = new GoogleCalendar(option, this.onEventLoaded);
         
 
         this.state = {
@@ -40,7 +33,7 @@ class App extends Component {
 
     onEventLoaded(events){
         this.setState({events});
-        console.log(this.state);
+        console.log("this is the state",this.state);
     }
 
     render() {

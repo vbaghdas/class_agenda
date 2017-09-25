@@ -3,23 +3,21 @@ import EventData from './event_data';
 
 
 export default class GoogleCalendar{
-    constructor(props){
+    constructor(props,callback){
         this.option = props;
+        this.callback = callback;
     }
 
-    load(){
-        
+    load(){   
         request
             .get(this.getString(this.option))
             .end((err, resp) => {
                 if (!err) {
                     const events = [];
-                    console.log(event);
                     JSON.parse(resp.text).items.map((event) => {
-                        console.log('this is the event', event)
                         events.push(new EventData(event));
                     });
-                    this.option.onloaded(events)
+                    this.callback(events)
                 }
             })
     }
