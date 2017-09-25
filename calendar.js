@@ -39,6 +39,11 @@ function applyClickHandlers () {
         cal.generate();
         inactiveDays();
     });
+
+    $('.calendar').on('click', '.calDay', function(){
+        $('.modal').modal('show')
+    })
+
 }
 
 function inactiveDays () {
