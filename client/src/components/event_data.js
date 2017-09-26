@@ -13,6 +13,7 @@ export default class Event_data{
         this.date = null;
         this.facility = null;
         this.location = null;
+        this.description = props.description;
         this.parseDescription(props.description);
     }
     parseDescription(description){
@@ -22,7 +23,7 @@ export default class Event_data{
             when = event.start.date;
         }
         */
-        
+
         //extract from event description
         var description_object = hashtag_parser(description);
         for(var p in description_object){

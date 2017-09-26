@@ -11,6 +11,7 @@ import Background from './background/background';
 
 import GoogleCalendar from './google_calendar';
 import option from './google_calendar_config';
+import Timer from './timer';
 
 //should make a timer outside the google calendar class
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         super(props);
         this.onEventLoaded = this.onEventLoaded.bind(this);
         this.googleCalendar = new GoogleCalendar(option, this.onEventLoaded);
+        this.Timer = new Timer(this.googleCalendar.load, option.refreshTime);
         
 
         this.state = {
@@ -29,6 +31,7 @@ class App extends Component {
 
     componentDidMount () {
         this.googleCalendar.load();
+        this.Timer.start();
     }
 
     onEventLoaded(events){

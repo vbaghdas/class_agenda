@@ -3,9 +3,11 @@ import EventData from './event_data';
 
 
 export default class GoogleCalendar{
-    constructor(props,callback){
-        this.option = props;
+    constructor(option,callback){
+        this.option = option;
         this.callback = callback;
+        this.getString = this.getString.bind(this);
+        this.load = this.load.bind(this);
     }
 
     load(){   
@@ -25,7 +27,7 @@ export default class GoogleCalendar{
     getString(option){
         var currentDate = new Date();
         var maxDate = new Date();
-        maxDate.setDate(currentDate.getDate()+this.option.loadLength);
+        maxDate.setDate(currentDate.getDate()+option.loadLength);
 
         var result = "";
         result += `https://www.googleapis.com/calendar/v3/calendars/${option.calendar_id}/events`

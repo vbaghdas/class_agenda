@@ -3,7 +3,7 @@ var option ={
     api_key: `AIzaSyDTmFMqAgAqD4vq3srRgmA3mRuqz_fAljY`,
     maxResults: 5,
     loadLength: 90,
-    refreshTime: 20*60
+    refreshTime: 20* 60
 }
 
 export default option;
