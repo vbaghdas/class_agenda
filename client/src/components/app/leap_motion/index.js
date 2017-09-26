@@ -27,9 +27,9 @@ class LeapMotion{
         this.gestureCallback = gestureCallback;
         this.options = null;
         this.stop = false;
-        this.sensitive = 0.8;
-        this.accuracy = 0.5;
-        this.timeCapture = 60; // frame
+        this.sensitive = 0.6;
+        this.accuracy = 0.4;
+        this.timeCapture = 15; // frame
         this.distanceCapture = 200;
         this.controller = Leap.loop(this.options, (frame)=> {
             if(stop){return;}
