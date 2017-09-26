@@ -1,7 +1,7 @@
 
 // if you want any data from the calendar
 // plz declare it here
-import hashtag_parser from './hashtag_parser';
+import hashtag_parser from '../helper/hashtag_parser';
 
 export default class Event_data{
     

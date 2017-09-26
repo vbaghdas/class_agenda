@@ -1,9 +1,9 @@
 import request from 'superagent';
 import EventData from './event_data';
-
+import option from './google_calendar_config';
 
 export default class GoogleCalendar{
-    constructor(option,callback){
+    constructor(callback){
         this.option = option;
         this.callback = callback;
         this.getString = this.getString.bind(this);
