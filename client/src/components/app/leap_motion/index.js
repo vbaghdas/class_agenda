@@ -25,7 +25,9 @@
 class LeapMotion{
     constructor(gestureCallback){
         this.gestureCallback = gestureCallback;
-        this.options = null;
+        this.options = {
+            frameEventName: "deviceFrame"
+        };
         this.stop = false;
         this.sensitive = 0.6;
         this.accuracy = 0.4;

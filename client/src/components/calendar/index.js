@@ -4,14 +4,44 @@ import React, {Component} from 'react';
 class Calendar extends Component{
     constructor(props){
         super(props);
-
-
+        var now = new Date();
+        this.currentYear = now.getFullYear();
+        this.currentMonth = now.getMonth();
+        this.currentDate = now.getDate();
+        this.currentDay = now.getDay();
     }
 
-    createRow(){
-        return (
-            <tr className="calDayRow"></tr>
-        )
+    createRows(){
+        var date = new Date();
+        date.setDate(1);
+        var sunday = 0;
+        var offset = sunday - date.getDay();
+        var startDate = new Date(date.getFullYear(), date.getMonth(), 1+offset);
+        var rowsCount = 5;
+        var weeklength = 7;
+        var dayArr = [];
+
+        for(let i = 0; i < weeklength * rowsCount; ++i){
+            dayArr.push(startDate.getDate());
+            startDate.setDate(startDate.getDate()+1);
+        }
+
+        dayArr = dayArr.map((item,index)=>{
+            return <td className="calDay" key={index}>{item}</td>
+        });
+
+        var rowArr = [];
+        for(let i = 0; i < rowsCount; ++i){
+            rowArr.push(dayArr.splice(0,weeklength));
+        }
+        rowArr = rowArr.map((item,index)=>{
+            return (
+            <tr className="calDayRow" key = {index}>
+                    {item}
+            </tr>
+            );
+        });
+        return rowArr;
     }
 
     render() {
@@ -21,51 +51,7 @@ class Calendar extends Component{
                     <tbody>
                         <tr className="calMonth"></tr>
                         <tr className="calHeaderRow"></tr>
-                        <tr className="calDayRow">
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                        </tr>
-                        <tr className="calDayRow">
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                        </tr>
-                        <tr className="calDayRow">
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                        </tr>
-                        <tr className="calDayRow">
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                        </tr>
-                        <tr className="calDayRow">
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                            <td className="calDay"></td>
-                        </tr>
+                        {this.createRows()}
                     </tbody>
                 </table>
             </div>
