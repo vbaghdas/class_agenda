@@ -50,7 +50,7 @@ class App extends Component {
     }
 
     onEventLoaded(events){
-        this.setState({events});
+        this.setState({events,loaded:true});
         console.log("this is the state",this.state);
     }
 
@@ -60,7 +60,7 @@ class App extends Component {
                 <Header />
                 <Route exact path="/" component={Home} />
                 <Route path="/events" render={ routeData => {
-                    return <Events {...routeData} events={this.state.events} />
+                    return <Events {...routeData} events={this.state.events} loaded={this.state.loaded} />
                 }} />
                 <Route path="/calendar" component={Calendar} />
                 <Route path="/about" component={About} />
