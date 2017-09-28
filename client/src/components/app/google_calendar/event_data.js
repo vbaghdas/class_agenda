@@ -13,6 +13,13 @@ export default class Event_data{
         this.date = null;
         this.facility = null;
         this.location = null;
+        var when = props.start.dateTime;
+        if (!when) {
+            when = props.start.date;
+        }
+        console.log(when);
+        this.formattedDate = new Date(when);
+        console.log(this.formattedDate);
         this.description = props.description;
         this.parseDescription(props.description);
     }

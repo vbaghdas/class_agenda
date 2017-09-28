@@ -1,6 +1,8 @@
 body {
     background: #222;
     color: #fff;
+    margin: 0;
+    padding: 0;
 }
 
 /*Background Animation*/
@@ -120,8 +122,9 @@ body {
 
 /*Calendar*/
 
-tr {
+.calendar {
     display: flex;
+    justify-content: center;
 }
 
 .calTable {
@@ -141,6 +144,10 @@ tr {
     flex-shrink: 1;
     flex-basis: 0;
     text-align: center;
+}
+
+.calDayRow {
+    display: flex;
 }
 
 .calDay{
@@ -170,9 +177,40 @@ tr {
     margin-left: 15px;
 }
 
-.modal {
-    top: 25%;
+
+/*Calendar Modal*/
+
+/*Gray background*/
+.backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
     left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+    padding: 50px;
+}
+
+/*The modal "window"*/
+.modalBody {
+    max-width: 500px;
+    min-height: 300px;
+    margin: 0 auto;
+    animation-duration: .5s;
+}
+
+.fadeIn {
+    animation: fadeIn 0.5s cubic-bezier(0.165, 0.24, 0.44, 1) forwards;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        transform:scale(0);
+    }
+    100% {
+        transform:scale(1.25);
+    }
 }
 
 

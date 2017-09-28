@@ -62,7 +62,9 @@ class App extends Component {
                 <Route path="/events" render={ routeData => {
                     return <Events {...routeData} events={this.state.events} />
                 }} />
-                <Route path="/calendar" component={Calendar} />
+                <Route path="/calendar" render={ routeData => {
+                    return <Calendar {...routeData} events={this.state.events} />
+                }} />
                 <Route path="/about" component={About} />
                 <Background />
             </div>

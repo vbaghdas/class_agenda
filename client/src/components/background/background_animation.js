@@ -1,18 +1,13 @@
 $( document ).ready(function() {
 
     var bg_animated = false;
-    var bg_number_of_curves = 64;
+    var bg_number_of_curves = 16;
 
     var canvas = document.getElementById("animation-canvas");
     var ctx = canvas.getContext("2d");
-    window.requestAnimFrame = (function () {
-        return window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            function (callback) {
-                window.setTimeout(callback, 1000 / 60);
-            };
-    })();
+    window.requestAnimFrame = function (callback) {
+        window.setTimeout(callback, 1000/15);
+    };
 
     var curves_array = [];
     var curve = function (abc1x, abc1y, abc2x, abc2y, x, y, abc1xvx, abc1xvy, abc1yvx, abc1yvy, abc2xvx, abc2xvy, abc2yvx, abc2yvy) {
@@ -74,7 +69,7 @@ $( document ).ready(function() {
     function bgCanvasDraw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 6;
         ctx.strokeStyle = $("#animation-wrap").css('color');
 
         for (var i = 0; i < curves_array.length; i++) {
@@ -89,20 +84,20 @@ $( document ).ready(function() {
             ctx.stroke();
 
             if (curves_array[i].abc1x < 0 || curves_array[i].abc1x > canvas.width) {
-                curves_array[i].abc1x -= curves_array[i].abc1xvx;
+                curves_array[i].abc1x -= curves_array[i].abc1xvx*1;
                 curves_array[i].abc1xvx *= -1;
             }
             if (curves_array[i].abc1y < 0 || curves_array[i].abc1y > canvas.height) {
-                curves_array[i].abc1y -= curves_array[i].abc1yvy;
+                curves_array[i].abc1y -= curves_array[i].abc1yvy*1;
                 curves_array[i].abc1yvy *= -1;
             }
 
             if (curves_array[i].abc2x < 0 || curves_array[i].abc2x > canvas.width) {
-                curves_array[i].abc2x -= curves_array[i].abc2xvx;
+                curves_array[i].abc2x -= curves_array[i].abc2xvx*1;
                 curves_array[i].abc2xvx *= -1;
             }
             if (curves_array[i].abc2y < 0 || curves_array[i].abc2y > canvas.height) {
-                curves_array[i].abc2y -= curves_array[i].abc2yvy;
+                curves_array[i].abc2y -= curves_array[i].abc2yvy*1;
                 curves_array[i].abc2yvy *= -1;
             }
             curves_array[i].abc1y += curves_array[i].abc1yvy;
