@@ -25,6 +25,8 @@ class App extends Component {
         this.dispatcher = new Dispatcher();
         this.Leap = new Leap(this.dispatcher);
         this.dispatcher.dispatch("startRecogniseGesture");
+
+        //should move all the page control into a new file
         this.dispatcher.addListener("swipe_-x", this.pressLeftArrow.bind(this));
         this.dispatcher.addListener("swipe_x", this.pressRightArrow.bind(this));
 
