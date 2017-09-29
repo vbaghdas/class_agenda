@@ -13,7 +13,6 @@ export default (props) => {
         rows.push(props.events[i]);
         ++i;
     }
-    console.log("rows:",rows);
     rows = rows.map((item,index)=>{
         return <EventRow event={item} key={index}/>
     });

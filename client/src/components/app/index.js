@@ -12,6 +12,7 @@ import Background from '../background';
 import GoogleCalendar from './google_calendar';
 import Timer from './helper/timer';
 import Leap from './leap_motion';
+import Dispatcher from './helper/dispatcher';
 
 //should make a timer outside the google calendar class
 class App extends Component {
@@ -21,9 +22,11 @@ class App extends Component {
         this.onEventLoaded = this.onEventLoaded.bind(this);
         this.googleCalendar = new GoogleCalendar(this.onEventLoaded);
         this.Timer = new Timer(this.googleCalendar.load, this.googleCalendar.option.refreshTime);
-        
-        this.Leap = new Leap(this.onGesture);
-        this.Leap.startRecognise();
+        this.dispatcher = new Dispatcher();
+        this.Leap = new Leap(this.dispatcher);
+        this.dispatcher.dispatch("startRecogniseGesture");
+        this.dispatcher.addListener("swipe_-x", this.pressLeftArrow.bind(this));
+        this.dispatcher.addListener("swipe_x", this.pressRightArrow.bind(this));
 
         this.state = {
             events: []
@@ -31,18 +34,20 @@ class App extends Component {
         
     }
 
-    onGesture(gesture){
-        if(gesture.type === "swipe" && gesture.data === "-x"){
-            var e = new Event("keydown");
-            e.which = 39;
-            document.dispatchEvent(e);
-        }else if(gesture.type ==="swipe" && gesture.data === "x"){
-            var e = new Event("keydown");
-            e.which = 37;
-            document.dispatchEvent(e);
-        }
-        setTimeout(()=>{gesture.leap.startRecognise()},1000);
+    pressLeftArrow(){
+        var e = new Event("keydown");
+        e.which = 39;
+        document.dispatchEvent(e);
+        setTimeout(()=>{this.dispatcher.dispatch("startRecogniseGesture")},1000);
     }
+
+    pressRightArrow(){
+        var e = new Event("keydown");
+        e.which = 37;
+        document.dispatchEvent(e);
+        setTimeout(()=>{this.dispatcher.dispatch("startRecogniseGesture")},1000);
+    }
+
 
     componentDidMount () {
         this.googleCalendar.load();

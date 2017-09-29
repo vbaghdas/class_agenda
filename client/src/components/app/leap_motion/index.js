@@ -1,5 +1,3 @@
-
-
 //when recognise a gesture, stop recognizing, and call callback,
 //and then finish what u when do then start it again
 
@@ -23,8 +21,11 @@
 // }
 
 class LeapMotion{
-    constructor(gestureCallback){
-        this.gestureCallback = gestureCallback;
+    constructor(dispatcher){
+        this.dispatcher = dispatcher;
+        this.dispatcher.addListener("stopRecogniseGesture", this.stopRecognise);
+        this.dispatcher.addListener("startRecogniseGesture", this.startRecognise);
+        
         this.options = {
             frameEventName: "deviceFrame"
         };
@@ -96,31 +97,25 @@ class LeapMotion{
         movement.avg.x = movement.total.x / previousFrames.length;
         movement.avg.y = movement.total.y / previousFrames.length;
         movement.avg.z = movement.total.z / previousFrames.length;
-        if(movement.avg.x < this.sensitive*-this.distanceCapture){
-            console.log("swipe left");
-            //make an gesture object then stop recognizing
-            this.triggerGesture({type: "swipe", data: "-x"});
-        }else if(movement.avg.x > this.sensitive* this.distanceCapture){
-            console.log("swipe right");
-            this.triggerGesture({type: "swipe", data: "x"});
-        }else if(movement.avg.y < this.sensitive* -this.distanceCapture){
-            console.log("swipe down");
-            this.triggerGesture({type: "swipe", data: "-y"});
-        }else if(movement.avg.y > this.sensitive* this.distanceCapture){
-            console.log("swipe up");
-            this.triggerGesture({type: "swipe", data: "y"});
-        }else if(movement.avg.z < this.sensitive* -this.distanceCapture){
-            console.log("swipe forward");
-            this.triggerGesture({type: "swipe", data: "-z"});
-        }else if(movement.avg.z > this.sensitive* this.distanceCapture){
-            console.log("swipe back");
-            this.triggerGesture({type: "swipe", data: "z"});
-        }
-    }
 
-    triggerGesture(gesture){
-        this.stopRecognise();
-        this.gestureCallback({leap:this, type: gesture.type, data: gesture.data});
+        let farest = Math.max(Math.abs(movement.avg.x),Math.abs(movement.avg.y),Math.abs(movement.avg.z));
+        if( farest > this.sensitive*this.distanceCapture){
+            let cmd = "swipe_";
+            switch(farest){
+                case Math.abs(movement.avg.x):
+                    cmd += movement.avg.x >0 ? "x" : "-x";
+                    break;
+                case Math.abs(movement.avg.y):
+                cmd += movement.avg.y >0 ? "y" : "-y";
+                    break;
+                case Math.abs(movement.avg.z):
+                cmd += movement.avg.z >0 ? "z" : "-z";
+                    break;
+            }
+            console.log(cmd);
+            this.dispatcher.dispatch("stopRecogniseGesture");
+            this.dispatcher.dispatch(cmd);
+        }
     }
 }
 
