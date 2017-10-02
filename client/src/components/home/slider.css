@@ -15,7 +15,7 @@
     /*overflow: hidden;*/
 }
 
-.navIconContainer, .prev, .prevLeftSecond, .selected, .next, .nextRightSecond{
+.navIconContainer, .hideLeft, .hideRight, .prev, .prevLeftSecond, .selected, .next, .nextRightSecond{
     position: absolute;
     transition: transform 1s, left 1s, opacity 1s, z-index 0s;
     opacity: 1;
@@ -37,14 +37,35 @@
     color: #5cb7d6;
 }
 
-
 .fa {
     font-size: 6rem;
     top: 25%;
     position: relative;
 }
 
-.prev{
+.hideLeft{
+    left: 0%;
+    opacity: 0;
+    transform: translateY(50%) translateX(-50%);
+}
+
+.hideLeft > .navIcon {
+    width: 200px;
+    height: 200px;
+}
+
+.hideRight {
+    left: 100%;
+    opacity: 0;
+    transform: translateY(50%) translateX(-50%);
+}
+
+.hideRight > .navIcon {
+    width: 200px;
+    height: 200px
+}
+
+.prev {
     z-index: 5;
     left: 30%;
     transform: translateY(50px) translateX(-50%);

@@ -6,33 +6,56 @@ import CalDay from './calDay';
 class Calendar extends Component{
     constructor(props){
         super(props);
-        var date = new Date();
-        this.currentYear = date.getFullYear();
-        this.currentMonth = date.getMonth();
-        this.currentDate = date.getDate();
-        this.currentDay = date.getDay();
-        this.now = new Date();
-        this.state = { isOpen: false };
+
+        const date = new Date();
+
+        this.state = { 
+            isOpen: false,
+            date: new Date(),
+            currentYear: date.getFullYear(),
+            currentMonth: date.getMonth(),
+            sunday: 0,
+            rowsCount: 5,
+            weeklength: 7,
+         };
     }
 
-    toggleModal = () => {
+    toggleModal = (event) => {
         this.setState({
-              isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen,
+            currentSelectEvent: event
         });
     };
 
-    createRows(){
-        var date = new Date();
+    calMonth(){
+        const monthsArr = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 
+            'August', 'September', 'October', 'November', 'December'
+        ];
+        return monthsArr[this.state.currentMonth] + ' ' + this.state.currentYear;
+    }
+
+    calHeader(){
+        let calHeaderRow = [
+            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+        ]
+        return calHeaderRow.map((item,index)=>{
+            return (
+            <td className="calHeaderDay" key={index}>{item}</td>
+            );
+        });
+    }
+
+    calDay(){
+        const { date, sunday,rowsCount, weeklength } = this.state;
         date.setDate(1);
-        var sunday = 0;
-        var offset = sunday - date.getDay();
-        var startDate = new Date(date.getFullYear(), date.getMonth(), 1+offset);
-        var rowsCount = 5;
-        var weeklength = 7;
-        var dayArr = [];
+        let offset = sunday - date.getDay();
+        const startDate = new Date(date.getFullYear(), date.getMonth(), 1+offset);
+        let dayArr = [];
 
         for(let i = 0; i < weeklength * rowsCount; ++i){
-            dayArr.push({date:startDate.getDate(),month:9});
+            // hard code the month
+            dayArr.push({date:startDate.getDate(),month:startDate.getMonth()+1});
             startDate.setDate(startDate.getDate()+1);
         }
 
@@ -40,25 +63,20 @@ class Calendar extends Component{
             let targetEvent = null;
             let events = this.props.events;
             for(let i = 0; i < events.length; ++i){
-                console.log("event month",events[i].formattedDate.getMonth() );
-                console.log("calDay month",item.month);
                 if(events[i].formattedDate.getMonth() === item.month && events[i].formattedDate.getDate() === item.date){
                     targetEvent = events[i];
-                    console.log("targetEvent",targetEvent);
                 }
             }
-            return <CalDay className="calDay" key={index}  onClick={this.toggleModal} event={targetEvent}>{item.date}</CalDay>
+            return <CalDay key={index}  onClick={this.toggleModal} date={item.date} event={targetEvent}></CalDay>
         });
 
-        var rowArr = [];
+        let rowArr = [];
         for(let i = 0; i < rowsCount; ++i){
             rowArr.push(dayArr.splice(0,weeklength));
         }
         rowArr = rowArr.map((item,index)=>{
             return (
-            <tr className="calDayRow" key = {index}>
-                    {item}
-            </tr>
+            <tr className="calDayRow" key = {index}>{item}</tr>
             );
         });
         return rowArr;
@@ -69,13 +87,12 @@ class Calendar extends Component{
             <div className="calendar">
                 <table>
                     <tbody>
-                        <tr className="calMonth"></tr>
-                        <tr className="calHeaderRow"></tr>
-                        {this.createRows()}
+                        <tr className="calMonth">{this.calMonth()}</tr>
+                        <tr className="calHeaderRow">{this.calHeader()}</tr>
+                        {this.calDay()}
                     </tbody>
                 </table>
-                <Modal show={this.state.isOpen}
-                       onClose={this.toggleModal}>
+                <Modal show={this.state.isOpen} onClose={this.toggleModal} event={this.state.currentSelectEvent}>
                 </Modal>
             </div>
         )

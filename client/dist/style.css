@@ -5,6 +5,7 @@ body {
     padding: 0;
 }
 
+
 /*Background Animation*/
 
 #animation-wrap {
@@ -79,7 +80,7 @@ body {
 }
 
 .eventCardBodyMiddle {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .eventDate {
@@ -102,12 +103,6 @@ body {
     width: 100%;
 }
 
-.eventCardBodyFooter {
-    position: relative;
-    padding: 0;
-    margin-top: 30px;
-}
-
 .eventFacility {
     color: #5cb7d6;
     font-size: 1.5em;
@@ -121,6 +116,10 @@ body {
 
 
 /*Calendar*/
+
+tr {
+    display: flex;
+}
 
 .calendar {
     display: flex;
@@ -146,10 +145,6 @@ body {
     text-align: center;
 }
 
-.calDayRow {
-    display: flex;
-}
-
 .calDay{
     padding: 12px;
     width: 12vw;
@@ -164,7 +159,6 @@ body {
     box-shadow: #5cb7d6 0 0 5px 5px;
     border: 0;
 }
-
 .inactive {
     background-color: rgba(99, 108, 114, 0.5);
 }
@@ -194,7 +188,7 @@ body {
 /*The modal "window"*/
 .modalBody {
     max-width: 500px;
-    min-height: 300px;
+    minheight: 300px;
     margin: 0 auto;
     animation-duration: .5s;
 }

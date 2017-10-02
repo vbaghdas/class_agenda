@@ -6,7 +6,7 @@ import Header from '../header';
 import Home from '../home';
 import Events from '../events';
 import Calendar from '../calendar';
-import About from '../about';
+import About from '../about/index.js';
 import Background from '../background';
 
 import GoogleCalendar from './google_calendar';
@@ -66,7 +66,7 @@ class App extends Component {
                     return <Calendar {...routeData} events={this.state.events} />
                 }} />
                 <Route path="/about" component={About} />
-                <Background />
+                {/*<Background />*/}
             </div>
         )
     }
