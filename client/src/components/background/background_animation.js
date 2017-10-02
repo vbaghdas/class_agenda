@@ -1,3 +1,4 @@
+/*
 $( document ).ready(function() {
 
     var bg_animated = false;
@@ -116,3 +117,4 @@ $( document ).ready(function() {
     bgCanvas();
 
 });
+*/
