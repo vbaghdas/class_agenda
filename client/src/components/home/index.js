@@ -23,10 +23,10 @@ class Home extends Component{
 
     render(){
 
-        if(this.props.gesture_enable && this.props.gesture_cmd === "swipe_-x"){
+        if(this.props.gesture.enable && this.props.gesture.cmd === "swipe_-x"){
             this.pressLeftArrow();
             setTimeout(()=> {this.props.enableGesture(true);}, 1000);
-        }else if(this.props.gesture_enable && this.props.gesture_cmd === "swipe_x"){
+        }else if(this.props.gesture.enable && this.props.gesture.cmd === "swipe_x"){
             this.pressRightArrow();
             setTimeout(()=> {this.props.enableGesture(true);}, 1000);
         }
@@ -66,9 +66,9 @@ class Home extends Component{
 }
 
 const mapStateToProps = state => {
+    var {gesture} = state;
     return {
-        gesture_cmd : state.gesture.cmd,
-        gesture_enable: state.gesture.enable
+        gesture: gesture
     };
 };
 

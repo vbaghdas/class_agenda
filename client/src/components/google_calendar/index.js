@@ -54,7 +54,7 @@ class GoogleCalendar extends Component{
 
 const mapStateToProps = state =>{
     return {
-        eventList: state.eventList.eventList
+        eventList: state.eventList.eventList,
     };
 }
 

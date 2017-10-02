@@ -83,6 +83,7 @@ class Calendar extends Component{
     }
 
     render() {
+        console.log(this.props);
         if(this.props.eventList){
             return (
                 <div className="calendar">
@@ -109,8 +110,10 @@ class Calendar extends Component{
 }
 
 const mapStateToProps = state => {
+    var {eventList, gesture} = state;
     return{
-        eventList: state.eventList.eventList
+        eventList: eventList.eventList,
+        gesture: gesture
     }
 };
 

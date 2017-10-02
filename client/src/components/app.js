@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 
 import { Route } from 'react-router-dom';
 
-import Header from '../header';
-import Home from '../home';
-import Events from '../events';
-import Calendar from '../calendar';
-import About from '../about/index.js';
-import Background from '../background';
+import Header from './header';
+import Home from './home';
+import Events from './events';
+import Calendar from './calendar';
+import About from './about/index.js';
+import Background from './background';
 
-import GoogleCalendar from '../google_calendar';
-import LeapMotion from '../leapmotion';
+import GoogleCalendar from './google_calendar';
+import LeapMotion from './leapmotion';
 
 //should make a timer outside the google calendar class
 class App extends Component {

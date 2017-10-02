@@ -13,7 +13,7 @@ class LeapMotion extends Component{
         this.timeCapture = 40; // frame
         this.distanceCapture = 200;
         this.controller = Leap.loop(this.options, (frame)=> {
-            if(!this.props.gesture_enable){return;}
+            if(!this.props.enable){return;}
             var hands = frame.hands;
             if(hands.length>0)
             {
@@ -44,7 +44,6 @@ class LeapMotion extends Component{
     }
 
     analysisGesture(hand, previousFrames){
-        console.log("did");
         var movement = {
             arr: [],
             total: { x: 0, y: 0, z:0 },
@@ -99,10 +98,10 @@ class LeapMotion extends Component{
 
 
 const mapStateToProps = state =>{
-    console.log(state);
+    var {gesture} = state;
     return {
-        gesture_cmd : state.gesture.cmd,
-        gesture_enable: state.gesture.enable
+        cmd: gesture.cmd,
+        enable: gesture.enable
     };
 }
 
