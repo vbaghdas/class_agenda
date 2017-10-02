@@ -6,10 +6,17 @@ class CalDay extends Component {
     }
 
     render(){
-        console.log(this.props.event);
-        return (
-            <td>1</td>
-        )
+        let event = this.props.event;
+        if(event){
+            return (
+                <td className="calDay" onClick={()=>this.props.onClick(event)}><img className="avatar" src={event.avatar}/></td>
+            )
+        }else{
+            return (
+                <td className="calDay">{this.props.date}</td>
+            )
+        }
+
     }
 }
 

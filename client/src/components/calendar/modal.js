@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class Modal extends React.Component {
+class Modal extends Component {
     render() {
         // Render nothing if the "show" prop is false
         if(!this.props.show) {
             return null;
         }
 
-        const avatarContainer = {
+        const { avatarContainer, eventContainer } = {
             float: 'none'
         };
 
-        const eventContainer = {
-            float: 'none'
-        };
-
+        console.log(this.props);
         return (
             <div className="backdrop" onClick={this.props.onClose}>
                 <div className="modalBody fadeIn">
@@ -22,18 +19,20 @@ class Modal extends React.Component {
                         <div className="row eventRow">
                             <div className="eventCard">
                                 <div className="avatarContainer col-xs-12" style={avatarContainer}>
+                                    <img className="avatar" src={this.props.event.avatar}/>
                                 </div>
                                 <div className="eventCardBody col-xs-12" style={eventContainer}>
                                     <div className="eventCardBodyTop">
-                                        <span className="company"></span>
+                                        <span className="company"><img className="companyLogo" src={this.props.event.logo}/>
+                                        </span>
                                     </div>
                                     <div className="eventCardBodyMiddle">
-                                        <span className="eventDate"></span>
-                                        <span className="eventSpeaker"></span>
+                                        <span className="eventDate">{this.props.event.date}</span>
+                                        <span className="eventSpeaker">{this.props.event.name}</span>
                                     </div>
-                                    <div class="eventCardBodyFooter">
-                                        <span className="eventFacility"></span>
-                                        <span className="eventLocation"></span>
+                                    <div className="eventCardBodyFooter">
+                                        <span className="eventFacility">{this.props.event.facility}</span>
+                                        <span className="eventLocation">{this.props.event.location}</span>
                                     </div>
                                 </div>
                             </div>
