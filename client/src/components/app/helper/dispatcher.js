@@ -1,5 +1,3 @@
-
-
 class Dispatcher {
     constructor(){
         this.listeners = new Map();
