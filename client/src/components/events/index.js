@@ -1,16 +1,15 @@
 import React from 'react';
 import EventRow from './eventRow';
+import {connect} from 'react-redux';
 
-export default (props) => {
-    if(!props.loaded){
-        return <h1 className="text-center">Loading</h1>
-    }
+const Events =  (props) => {
+    console.log(props.eventList);
 
     var maxResult = 3;
     var rows = [];
     var i = 0;
-    while(props.events[i] && i < maxResult){
-        rows.push(props.events[i]);
+    while(props.eventList[i] && i < maxResult){
+        rows.push(props.eventList[i]);
         ++i;
     }
     rows = rows.map((item,index)=>{
@@ -23,3 +22,11 @@ export default (props) => {
         </div>
     );
 }
+
+const mapStateToProps= state => {
+    return{
+        eventList: state.eventList.eventList
+    };
+};
+
+export default connect(mapStateToProps)(Events);

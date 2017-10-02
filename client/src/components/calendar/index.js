@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Modal from './modal';
 import CalDay from './calDay';
-
+import {connect} from 'react-redux';
 
 class Calendar extends Component{
     constructor(props){
@@ -32,7 +32,7 @@ class Calendar extends Component{
             'January', 'February', 'March', 'April', 'May', 'June', 'July', 
             'August', 'September', 'October', 'November', 'December'
         ];
-        return monthsArr[this.state.currentMonth] + ' ' + this.state.currentYear;
+        return <td> {monthsArr[this.state.currentMonth] + ' ' + this.state.currentYear} </td>;
     }
 
     calHeader(){
@@ -61,7 +61,7 @@ class Calendar extends Component{
 
         dayArr = dayArr.map((item,index)=>{
             let targetEvent = null;
-            let events = this.props.events;
+            let events = this.props.eventList;
             for(let i = 0; i < events.length; ++i){
                 if(events[i].formattedDate.getMonth() === item.month && events[i].formattedDate.getDate() === item.date){
                     targetEvent = events[i];
@@ -83,20 +83,35 @@ class Calendar extends Component{
     }
 
     render() {
-        return (
-            <div className="calendar">
-                <table>
-                    <tbody>
-                        <tr className="calMonth">{this.calMonth()}</tr>
-                        <tr className="calHeaderRow">{this.calHeader()}</tr>
-                        {this.calDay()}
-                    </tbody>
-                </table>
-                <Modal show={this.state.isOpen} onClose={this.toggleModal} event={this.state.currentSelectEvent}>
-                </Modal>
-            </div>
-        )
+        if(this.props.eventList){
+            return (
+                <div className="calendar">
+                    <table>
+                        <tbody>
+                            <tr className="calMonth">{this.calMonth()}</tr>
+                            <tr className="calHeaderRow">{this.calHeader()}</tr>
+                            {this.calDay()}
+                        </tbody>
+                    </table>
+                    <Modal show={this.state.isOpen} onClose={this.toggleModal} event={this.state.currentSelectEvent}>
+                    </Modal>
+                </div>
+            );
+        }else{
+            return (
+                <div className="calendar">
+                    <h1 className="text-center mt-5">Loading</h1>
+                </div>
+            );
+        }
+        
     }
 }
 
-export default Calendar;
+const mapStateToProps = state => {
+    return{
+        eventList: state.eventList.eventList
+    }
+};
+
+export default connect(mapStateToProps)(Calendar);

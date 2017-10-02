@@ -1,41 +1,19 @@
-//when recognise a gesture, stop recognizing, and call callback,
-//and then finish what u when do then start it again
+import React, { Component } from 'react';
+import {gesture, enableGesture} from '../../actions';
+import {connect} from 'react-redux';
 
-/* what you will need
-<script src="http://js.leapmotion.com/leap-0.6.3.js"></script>
-// not this one <script src="http://js.leapmotion.com/leap-plugins-0.1.8.js"></script>
-<script src="leap.js"></script>
-*/
-
-/*********** example usage *****************/
-// document.addEventListener("DOMContentLoaded", init);
-// var leap = null;
-// function init(){
-//     leap = new LeapMotion(onGesture);
-// }
-
-// function onGesture(gesture){
-//     console.log(gesture);
-
-//     setTimeout(()=>{gesture.leap.startRecognise()},1000);
-// }
-
-class LeapMotion{
-    constructor(dispatcher){
-        this.dispatcher = dispatcher;
-        this.dispatcher.addListener("stopRecogniseGesture", this.stopRecognise);
-        this.dispatcher.addListener("startRecogniseGesture", this.startRecognise);
-        
+class LeapMotion extends Component{
+    constructor(props){
+        super(props);
         this.options = {
             frameEventName: "deviceFrame"
         };
-        this.stop = false;
         this.sensitive = 0.8;
         this.accuracy = 0.6;
         this.timeCapture = 40; // frame
         this.distanceCapture = 200;
         this.controller = Leap.loop(this.options, (frame)=> {
-            if(stop){return;}
+            if(!this.props.gesture_enable){return;}
             var hands = frame.hands;
             if(hands.length>0)
             {
@@ -45,16 +23,10 @@ class LeapMotion{
                 }
             }
         });
+        this.props.enableGesture(true);
     }
 
     
-    stopRecognise(){
-        stop = true;
-    }
-    startRecognise(){
-        stop = false;
-    }
-
 
     getPreviousFrame(start, end){
         if(arguments.length === 1 || start === end){
@@ -71,8 +43,8 @@ class LeapMotion{
         }
     }
 
-
     analysisGesture(hand, previousFrames){
+        console.log("did");
         var movement = {
             arr: [],
             total: { x: 0, y: 0, z:0 },
@@ -112,11 +84,27 @@ class LeapMotion{
                 cmd += movement.avg.z >0 ? "z" : "-z";
                     break;
             }
-            console.log(cmd);
-            this.dispatcher.dispatch("stopRecogniseGesture");
-            this.dispatcher.dispatch(cmd);
+            this.props.gesture(cmd);
+            this.props.enableGesture(false);
+
         }
+    }
+    render(){
+        console.log(this.props);
+        return (
+            <div></div>
+        );
     }
 }
 
-export default LeapMotion;
+
+const mapStateToProps = state =>{
+    console.log(state);
+    return {
+        gesture_cmd : state.gesture.cmd,
+        gesture_enable: state.gesture.enable
+    };
+}
+
+
+export default connect(mapStateToProps, {enableGesture,gesture})(LeapMotion);

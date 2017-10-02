@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
-import cmd from './cmd_reducer';
+import gesture from './gesture_reducer';
+import eventList from './event_reducer';
 
 
-export default combineReducers({cmd});
+export default combineReducers({gesture, eventList});

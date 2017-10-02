@@ -1,16 +1,22 @@
+import React, {Component} from 'react';
+import option from './google_calendar_config';
+import {connect} from 'react-redux';
+import {refreshEventData} from '../../actions'
 import request from 'superagent';
 import EventData from './event_data';
-import option from './google_calendar_config';
 
-export default class GoogleCalendar{
-    constructor(callback){
+class GoogleCalendar extends Component{
+
+    constructor(props){
+        super(props);
         this.option = option;
-        this.callback = callback;
         this.getString = this.getString.bind(this);
         this.load = this.load.bind(this);
+        this.load();
+        setInterval(()=>this.load(), this.option.refreshTime * 1000);
     }
 
-    load(){   
+    load(){
         request
             .get(this.getString(this.option))
             .end((err, resp) => {
@@ -19,7 +25,7 @@ export default class GoogleCalendar{
                     JSON.parse(resp.text).items.map((event) => {
                         events.push(new EventData(event));
                     });
-                    this.callback(events)
+                    this.props.refreshEventData(events);
                 }
             })
     }
@@ -38,4 +44,18 @@ export default class GoogleCalendar{
         result == `&orderBy= 'startTime'`
         return result;
     }
+
+    render(){
+        return (
+            <div></div>
+        );
+    }
 }
+
+const mapStateToProps = state =>{
+    return {
+        eventList: state.eventList.eventList
+    };
+}
+
+export default connect(mapStateToProps, {refreshEventData} )(GoogleCalendar);
