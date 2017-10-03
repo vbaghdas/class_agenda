@@ -6,8 +6,9 @@ export default function(state = DEFAULT_STATE, action){
     console.log("redu");
     console.log(action);
     switch(action.type){
-        case types.GESTURE:
-            return {...state, cmd: action.payload};
+        case types.SET_GESTURE_CALLBACK:
+            console.log("payload = ", action.payload);
+            return {...state, callback: action.payload};
         case types.ENABLE_GESTURE:
             return {...state, enable: action.payload, cmd: null};
         default :

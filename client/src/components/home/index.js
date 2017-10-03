@@ -4,10 +4,29 @@ import SliderJS from './slider';
 
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {enableGesture} from '../../actions';
+import {enableGesture, setGestureCallback} from '../../actions';
 
 
 class Home extends Component{
+
+    constructor(props){
+        super(props);
+        this.onGesture = this.onGesture.bind(this);
+    }
+
+    componentWillMount(){
+        this.props.setGestureCallback(this.onGesture);
+    }
+
+    onGesture(cmd){
+        if(cmd === "swipe_-x"){
+            this.pressLeftArrow();
+            setTimeout(()=> {this.props.enableGesture(true);}, 1000);
+        }else if(cmd === "swipe_x"){
+            this.pressRightArrow();
+            setTimeout(()=> {this.props.enableGesture(true);}, 1000);
+        }
+    }
 
     pressLeftArrow(){
         var e = new Event("keydown");
@@ -22,15 +41,6 @@ class Home extends Component{
     }
 
     render(){
-
-        if(this.props.gesture.enable && this.props.gesture.cmd === "swipe_-x"){
-            this.pressLeftArrow();
-            setTimeout(()=> {this.props.enableGesture(true);}, 1000);
-        }else if(this.props.gesture.enable && this.props.gesture.cmd === "swipe_x"){
-            this.pressRightArrow();
-            setTimeout(()=> {this.props.enableGesture(true);}, 1000);
-        }
-
         return (
             <div className="navIconContainer">
                 <div id="carousel">
@@ -72,4 +82,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {enableGesture})(Home);
+export default connect(mapStateToProps, {enableGesture, setGestureCallback})(Home);

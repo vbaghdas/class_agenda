@@ -28,11 +28,16 @@ class CalDay extends Component {
             )
         }else{
             return (
-                <td className="calDay">{this.props.date}</td>
+                <td className="calDay">{this.props.date.getDate()}</td>
             )
         }
-
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        selectDate: state.selectDate.date 
+    };
+};
 
 export default CalDay;

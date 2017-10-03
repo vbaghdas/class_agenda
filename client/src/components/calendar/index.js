@@ -1,28 +1,27 @@
 import React, {Component} from 'react';
 import Modal from './modal';
 import CalDay from './calDay';
+import VirtualCalendar from './virtual_calendar';
 import {connect} from 'react-redux';
 
 class Calendar extends Component{
     constructor(props){
         super(props);
-
-        const date = new Date();
+        
+        let now = new Date();
+        this.sunday = 0;
+        this.rowsCount = 5;
+        this.weeklength = 7;
 
         this.state = { 
-            isOpen: false,
-            date: new Date(),
-            currentYear: date.getFullYear(),
-            currentMonth: date.getMonth(),
-            sunday: 0,
-            rowsCount: 5,
-            weeklength: 7,
+            modelIsOpen: false,
+            currentShowDate: now,
          };
     }
 
     toggleModal = (event) => {
         this.setState({
-            isOpen: !this.state.isOpen,
+            modelIsOpen: !this.state.modelIsOpen,
             currentSelectEvent: event
         });
     };
@@ -32,7 +31,7 @@ class Calendar extends Component{
             'January', 'February', 'March', 'April', 'May', 'June', 'July', 
             'August', 'September', 'October', 'November', 'December'
         ];
-        return <td> {monthsArr[this.state.currentMonth] + ' ' + this.state.currentYear} </td>;
+        return <td> {monthsArr[this.state.currentShowDate.getMonth()] + ' ' + this.state.currentShowDate.getFullYear()} </td>;
     }
 
     calHeader(){
@@ -47,15 +46,14 @@ class Calendar extends Component{
     }
 
     calDay(){
-        const { date, sunday,rowsCount, weeklength } = this.state;
-        date.setDate(1);
-        let offset = sunday - date.getDay();
-        const startDate = new Date(date.getFullYear(), date.getMonth(), 1+offset);
+        let startDate = new Date(this.state.currentShowDate);
+        startDate.setDate(1);
+        let offset = this.sunday - startDate.getDay();
+        startDate.setDate(1+offset);
         let dayArr = [];
-
-        for(let i = 0; i < weeklength * rowsCount; ++i){
+        for(let i = 0; i < this.weeklength * this.rowsCount; ++i){
             // hard code the month
-            dayArr.push({date:startDate.getDate(),month:startDate.getMonth()+1});
+            dayArr.push(new Date(startDate));
             startDate.setDate(startDate.getDate()+1);
         }
 
@@ -63,16 +61,18 @@ class Calendar extends Component{
             let targetEvent = null;
             let events = this.props.eventList;
             for(let i = 0; i < events.length; ++i){
-                if(events[i].formattedDate.getMonth() === item.month && events[i].formattedDate.getDate() === item.date){
+                if(events[i].formattedDate.getFullYear() === item.getFullYear()
+                   && events[i].formattedDate.getMonth() === item.getMonth() 
+                   && events[i].formattedDate.getDate() === item.getDate()){
                     targetEvent = events[i];
                 }
             }
-            return <CalDay key={index}  onClick={this.toggleModal} date={item.date} event={targetEvent}></CalDay>
+            return <CalDay key={index}  onClick={this.toggleModal} date={item} event={targetEvent}></CalDay>
         });
 
         let rowArr = [];
-        for(let i = 0; i < rowsCount; ++i){
-            rowArr.push(dayArr.splice(0,weeklength));
+        for(let i = 0; i < this.rowsCount; ++i){
+            rowArr.push(dayArr.splice(0, this.weeklength));
         }
         rowArr = rowArr.map((item,index)=>{
             return (
@@ -83,10 +83,10 @@ class Calendar extends Component{
     }
 
     render() {
-        console.log(this.props);
         if(this.props.eventList){
             return (
                 <div className="calendar">
+                    <VirtualCalendar />
                     <table>
                         <tbody>
                             <tr className="calMonth">{this.calMonth()}</tr>
@@ -94,7 +94,7 @@ class Calendar extends Component{
                             {this.calDay()}
                         </tbody>
                     </table>
-                    <Modal show={this.state.isOpen} onClose={this.toggleModal} event={this.state.currentSelectEvent}>
+                    <Modal show={this.state.modelIsOpen} onClose={this.toggleModal} event={this.state.currentSelectEvent}>
                     </Modal>
                 </div>
             );
@@ -110,10 +110,8 @@ class Calendar extends Component{
 }
 
 const mapStateToProps = state => {
-    var {eventList, gesture} = state;
     return{
-        eventList: eventList.eventList,
-        gesture: gesture
+        eventList: state.eventList.eventList,
     }
 };
 

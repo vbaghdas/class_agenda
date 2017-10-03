@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {gesture, enableGesture} from '../../actions';
+import {enableGesture, setGestureCallback} from '../../actions';
 import {connect} from 'react-redux';
 
 class LeapMotion extends Component{
@@ -23,10 +23,11 @@ class LeapMotion extends Component{
                 }
             }
         });
+        this.callback = [];
         this.props.enableGesture(true);
     }
 
-    
+
 
     getPreviousFrame(start, end){
         if(arguments.length === 1 || start === end){
@@ -83,9 +84,9 @@ class LeapMotion extends Component{
                 cmd += movement.avg.z >0 ? "z" : "-z";
                     break;
             }
-            this.props.gesture(cmd);
+            console.log(this.props);
+            this.props.callback(cmd);
             this.props.enableGesture(false);
-
         }
     }
     render(){
@@ -100,10 +101,10 @@ class LeapMotion extends Component{
 const mapStateToProps = state =>{
     var {gesture} = state;
     return {
-        cmd: gesture.cmd,
-        enable: gesture.enable
+        enable: gesture.enable,
+        callback: gesture.callback
     };
 }
 
 
-export default connect(mapStateToProps, {enableGesture,gesture})(LeapMotion);
+export default connect(mapStateToProps, {enableGesture})(LeapMotion);
