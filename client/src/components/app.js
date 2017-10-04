@@ -7,7 +7,9 @@ import Home from './home';
 import Events from './events';
 import Calendar from './calendar';
 import About from './about/index.js';
+import Gamepad from './gamepad';
 import Background from './background';
+
 
 import GoogleCalendar from './google_calendar';
 import LeapMotion from './leapmotion';
@@ -25,6 +27,7 @@ class App extends Component {
                 <Route path="/events" component={Events} />
                 <Route path="/calendar" component={Calendar} />
                 <Route path="/about" component={About} />
+                <Route path="/gamepad" component={Gamepad} />
                 {/*<Background />*/}
             </div>
         )
