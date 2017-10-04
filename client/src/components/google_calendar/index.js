@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import option from './google_calendar_config';
 import {connect} from 'react-redux';
-import {refreshEventData} from '../../actions'
+import {refreshEventData, setEventDateRange} from '../../actions'
 import request from 'superagent';
 import EventData from './event_data';
 
@@ -34,7 +34,7 @@ class GoogleCalendar extends Component{
         var currentDate = new Date();
         var maxDate = new Date();
         maxDate.setDate(currentDate.getDate()+option.loadLength);
-
+        this.props.setEventDateRange(currentDate, maxDate);
         var result = "";
         result += `https://www.googleapis.com/calendar/v3/calendars/${option.calendar_id}/events`
         result += `?key=${option.api_key}`;
@@ -58,4 +58,4 @@ const mapStateToProps = state =>{
     };
 }
 
-export default connect(mapStateToProps, {refreshEventData} )(GoogleCalendar);
+export default connect(mapStateToProps, {refreshEventData, setEventDateRange} )(GoogleCalendar);

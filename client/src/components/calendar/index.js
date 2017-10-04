@@ -10,16 +10,29 @@ class Calendar extends Component{
         
         this.onGesture = this.onGesture.bind(this);
         this.calDay = this.calDay.bind(this);
+        this.getCurrentSelectEvent = this.getCurrentSelectEvent.bind(this);
 
         let now = new Date();
         this.sunday = 0;
         this.rowsCount = 5;
-        this.weeklength = 7;
+        this.weekLength = 7;
+        this.monthLength = 3;
 
         this.state = { 
             modelIsOpen: false,
             currentSelectDate: now,
          };
+    }
+
+    getCurrentSelectEvent(){
+        let {eventList, currentSelectDate} = this.props;
+        for(let i = 0; i < eventList.length; ++i){
+            console.log(eventList[i].formattedDate);
+            if(eventList[i].formattedDate.toDateString() === this.state.currentSelectDate.toDateString()){
+                return eventList[i];
+            }
+        }
+        return null;
     }
 
     componentWillMount(){
@@ -30,9 +43,15 @@ class Calendar extends Component{
     onGesture(cmd){
         let reset = false;
         switch(cmd){
+            case "enter":
+                this.toggleModal(this.getCurrentSelectEvent());
+                break;
             case "cancel":
-                console.log("success go back to home");
-                this.props.history.push("/");
+                if(this.state.modelIsOpen){
+                    this.toggleModal();
+                }else{
+                    this.props.history.push("/");
+                }
                 break;
             case "-x":
                 this.goDirection("left");
@@ -53,7 +72,7 @@ class Calendar extends Component{
             default:
                 break;
         }
-        setTimeout( ()=> { this.props.enableGesture(true) }, 400);
+        setTimeout( ()=> { this.props.enableGesture(true) }, 500);
 
     }
 
@@ -67,17 +86,23 @@ class Calendar extends Component{
                 offset = -1;
                 break;
             case "down":
-                offset = this.weeklength;
+                offset = this.weekLength;
                 break;
             case "up":
-                offset = -this.weeklength;
+                offset = -this.weekLength;
                 break;
         }
-        this.state.currentSelectDate.setDate(this.state.currentSelectDate.getDate()+offset);
-        this.setState(this.state.currentSelectDate);
+        let {currentSelectDate} = this.state;
+
+        currentSelectDate.setDate(currentSelectDate.getDate()+offset);
+        if(currentSelectDate.getTime()< this.props.startDate.getTime() || currentSelectDate.getTime() > this.props.endDate.getTime() ){
+            currentSelectDate.setDate(currentSelectDate.getDate()-offset);
+        }
+        this.setState(currentSelectDate);
     };
 
     toggleModal = (event) => {
+        if(event === null){return};
         this.setState({
             modelIsOpen: !this.state.modelIsOpen,
             currentSelectEvent: event
@@ -109,7 +134,7 @@ class Calendar extends Component{
         let offset = this.sunday - startDate.getDay();
         startDate.setDate(1+offset);
         let dayArr = [];
-        for(let i = 0; i < this.weeklength * this.rowsCount; ++i){
+        for(let i = 0; i < this.weekLength * this.rowsCount; ++i){
             // hard code the month
             dayArr.push(new Date(startDate));
             startDate.setDate(startDate.getDate()+1);
@@ -136,7 +161,7 @@ class Calendar extends Component{
 
         let rowArr = [];
         for(let i = 0; i < this.rowsCount; ++i){
-            rowArr.push(dayArr.splice(0, this.weeklength));
+            rowArr.push(dayArr.splice(0, this.weekLength));
         }
         rowArr = rowArr.map((item,index)=>{
             return (
@@ -173,8 +198,11 @@ class Calendar extends Component{
 }
 
 const mapStateToProps = state => {
+    let {eventList, startDate, endDate} = state.eventList;
     return{
-        eventList: state.eventList.eventList
+        eventList: eventList,
+        startDate: startDate,
+        endDate: endDate
     }
 };
 
