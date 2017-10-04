@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import Modal from './modal';
 import CalDay from './calDay';
-import VirtualCalendar from './virtual_calendar';
 import {connect} from 'react-redux';
+import {setGestureCallback, enableGesture, changeGestureMode} from '../../actions';
 
 class Calendar extends Component{
     constructor(props){
         super(props);
         
+        this.onGesture = this.onGesture.bind(this);
+        this.calDay = this.calDay.bind(this);
+
         let now = new Date();
         this.sunday = 0;
         this.rowsCount = 5;
@@ -15,9 +18,64 @@ class Calendar extends Component{
 
         this.state = { 
             modelIsOpen: false,
-            currentShowDate: now,
+            currentSelectDate: now,
          };
     }
+
+    componentWillMount(){
+        this.props.setGestureCallback(this.onGesture);
+        this.setState(this.state.currentSelectDate);
+    }
+
+    onGesture(cmd){
+        let reset = false;
+        switch(cmd){
+            case "cancel":
+                console.log("success go back to home");
+                this.props.history.push("/");
+                break;
+            case "-x":
+                this.goDirection("left");
+                reset = true;
+                break;
+            case "x":
+                this.goDirection("right");
+                reset = true;
+                break;
+            case "-y":
+                this.goDirection("down");
+                reset = true;
+                break;
+            case "y":
+                this.goDirection("up");
+                reset = true;
+                break;
+            default:
+                break;
+        }
+        setTimeout( ()=> { this.props.enableGesture(true) }, 400);
+
+    }
+
+    goDirection(direction){
+        let offset = 0;
+        switch(direction){
+            case "right":
+                offset = 1;
+                break;
+            case "left":
+                offset = -1;
+                break;
+            case "down":
+                offset = this.weeklength;
+                break;
+            case "up":
+                offset = -this.weeklength;
+                break;
+        }
+        this.state.currentSelectDate.setDate(this.state.currentSelectDate.getDate()+offset);
+        this.setState(this.state.currentSelectDate);
+    };
 
     toggleModal = (event) => {
         this.setState({
@@ -31,12 +89,12 @@ class Calendar extends Component{
             'January', 'February', 'March', 'April', 'May', 'June', 'July', 
             'August', 'September', 'October', 'November', 'December'
         ];
-        return <td> {monthsArr[this.state.currentShowDate.getMonth()] + ' ' + this.state.currentShowDate.getFullYear()} </td>;
+        return <td> {monthsArr[this.state.currentSelectDate.getMonth()] + ' ' + this.state.currentSelectDate.getFullYear()} </td>;
     }
 
     calHeader(){
         let calHeaderRow = [
-            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+            'Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
         ]
         return calHeaderRow.map((item,index)=>{
             return (
@@ -46,7 +104,7 @@ class Calendar extends Component{
     }
 
     calDay(){
-        let startDate = new Date(this.state.currentShowDate);
+        let startDate = new Date(this.state.currentSelectDate);
         startDate.setDate(1);
         let offset = this.sunday - startDate.getDay();
         startDate.setDate(1+offset);
@@ -60,14 +118,20 @@ class Calendar extends Component{
         dayArr = dayArr.map((item,index)=>{
             let targetEvent = null;
             let events = this.props.eventList;
+            let selected = false;
             for(let i = 0; i < events.length; ++i){
-                if(events[i].formattedDate.getFullYear() === item.getFullYear()
-                   && events[i].formattedDate.getMonth() === item.getMonth() 
-                   && events[i].formattedDate.getDate() === item.getDate()){
+                let eventDate = events[i].formattedDate;
+
+                if(eventDate.toDateString() === item.toDateString()){
                     targetEvent = events[i];
                 }
             }
-            return <CalDay key={index}  onClick={this.toggleModal} date={item} event={targetEvent}></CalDay>
+
+            let selectDate = this.state.currentSelectDate;
+            if(item.toDateString() === selectDate.toDateString()){
+                selected = true;
+            }
+            return <CalDay key={index}  onClick={this.toggleModal} date={item} event={targetEvent} selected={selected}></CalDay>
         });
 
         let rowArr = [];
@@ -86,7 +150,6 @@ class Calendar extends Component{
         if(this.props.eventList){
             return (
                 <div className="calendar">
-                    <VirtualCalendar />
                     <table>
                         <tbody>
                             <tr className="calMonth">{this.calMonth()}</tr>
@@ -111,8 +174,8 @@ class Calendar extends Component{
 
 const mapStateToProps = state => {
     return{
-        eventList: state.eventList.eventList,
+        eventList: state.eventList.eventList
     }
 };
 
-export default connect(mapStateToProps)(Calendar);
+export default connect(mapStateToProps, {setGestureCallback, enableGesture})(Calendar);

@@ -19,13 +19,15 @@ class Home extends Component{
     }
 
     onGesture(cmd){
-        if(cmd === "swipe_-x"){
-            this.pressLeftArrow();
-            setTimeout(()=> {this.props.enableGesture(true);}, 1000);
-        }else if(cmd === "swipe_x"){
+        if(cmd === "enter"){
+            let path = document.querySelector(".selected a").getAttribute("href");
+            this.props.history.push(path);
+        }else if(cmd === "-x"){
             this.pressRightArrow();
-            setTimeout(()=> {this.props.enableGesture(true);}, 1000);
+        }else if(cmd === "x"){
+            this.pressLeftArrow();
         }
+        setTimeout(()=> {this.props.enableGesture(true);}, 1000);
     }
 
     pressLeftArrow(){
@@ -76,9 +78,9 @@ class Home extends Component{
 }
 
 const mapStateToProps = state => {
-    var {gesture} = state;
+    var {leap} = state;
     return {
-        gesture: gesture
+        leap: leap
     };
 };
 

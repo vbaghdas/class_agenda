@@ -1,26 +1,53 @@
-import React from 'react';
+import React, {Component} from 'react';
 import EventRow from './eventRow';
 import {connect} from 'react-redux';
+import {setGestureCallback, enableGesture} from '../../actions';
 
-const Events =  (props) => {
-    console.log(props.eventList);
+class Events extends Component {
 
-    var maxResult = 3;
-    var rows = [];
-    var i = 0;
-    while(props.eventList[i] && i < maxResult){
-        rows.push(props.eventList[i]);
-        ++i;
+    constructor(props){
+        super(props);
+        this.onGesture = this.onGesture.bind(this);
+        this.getRows = this.getRows.bind(this);
+        this.maxResult = 3;
     }
-    rows = rows.map((item,index)=>{
-        return <EventRow event={item} key={index}/>
-    });
 
-    return (
-        <div>
-            {rows}
-        </div>
-    );
+    componentWillMount(){
+        this.props.setGestureCallback(this.onGesture);
+    }
+
+    onGesture(cmd){
+        if(cmd === "cancel"){
+            this.props.history.push("/");
+        }
+        setTimeout(()=>this.props.enableGesture(true),1000);
+    }
+
+    getRows(){
+        console.log(this.props);
+        let {eventList} = this.props;
+        let rows = [];
+        if(eventList){
+            var i = 0;
+            while(eventList[i] && i < this.maxResult){
+                rows.push(eventList[i]);
+                ++i;
+            }
+        }
+        
+        return rows.map((item,index)=>{
+            return <EventRow event={item} key={index}/>
+        });
+    }
+    
+
+    render(){
+        return(
+            <div>
+                {this.getRows()}
+            </div>
+        );   
+    };
 }
 
 const mapStateToProps= state => {
@@ -29,4 +56,4 @@ const mapStateToProps= state => {
     };
 };
 
-export default connect(mapStateToProps)(Events);
+export default connect(mapStateToProps, {setGestureCallback, enableGesture})(Events);

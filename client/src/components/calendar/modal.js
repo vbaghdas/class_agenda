@@ -11,7 +11,6 @@ class Modal extends Component {
             float: 'none'
         };
 
-        console.log(this.props);
         return (
             <div className="backdrop" onClick={this.props.onClose}>
                 <div className="modalBody fadeIn">

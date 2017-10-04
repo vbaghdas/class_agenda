@@ -21,14 +21,17 @@ class CalDay extends Component {
         let event = this.props.event;
         if(event){
             return (
-                <td className={this.state.ishover? "calDay enlarge": "calDay"}
+                <td className={this.props.selected || this.state.ishover? "calDay enlarge": "calDay"}
                 onMouseEnter={()=>this.onHover()} 
                 onMouseLeave={()=>this.onOut()}
                 onClick={()=>this.props.onClick(event)}><img className="avatar" src={event.avatar}/></td>
             )
         }else{
             return (
-                <td className="calDay">{this.props.date.getDate()}</td>
+                <td className={this.props.selected || this.state.ishover? "calDay enlarge": "calDay"}
+                    onMouseEnter={()=>this.onHover()} 
+                    onMouseLeave={()=>this.onOut()}
+                >{this.props.date.getDate()}</td>
             )
         }
     }
