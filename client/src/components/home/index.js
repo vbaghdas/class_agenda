@@ -66,11 +66,11 @@ class Home extends Component{
                             <Link to="/calendar"><i className="fa fa-calendar" aria-hidden="true"></i></Link>
                         </div>
                     </div>
-                    <div className="nextRightSecond navBut">
+                    {/* <div className="nextRightSecond navBut">
                         <div className="navIcon">
                             <Link to="/facebook"><i className="fa fa-facebook-square" aria-hidden="true"></i></Link>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );
