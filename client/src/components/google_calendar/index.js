@@ -32,6 +32,9 @@ class GoogleCalendar extends Component{
 
     getString(option){
         var currentDate = new Date();
+        currentDate.setHours(0);
+        currentDate.setMinutes(0);
+        console.log(currentDate);
         var maxDate = new Date();
         maxDate.setDate(currentDate.getDate()+option.loadLength);
         this.props.setEventDateRange(currentDate, maxDate);
