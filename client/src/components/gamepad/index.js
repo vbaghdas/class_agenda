@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {enableGesture, enableGameMode, setGestureCallback} from '../../actions'
 import Paddle from './paddle';
 import Ball from './ball';
-import PongStyleSheet from './pong.css';
 
 class Gamepad extends Component{
     constructor(props){

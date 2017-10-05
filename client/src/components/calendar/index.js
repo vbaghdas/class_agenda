@@ -75,7 +75,6 @@ class Calendar extends Component{
         }
 
         setTimeout( ()=> { this.props.enableGesture(true) }, 500);
-
     }
 
     goDirection(direction){
@@ -196,7 +195,6 @@ class Calendar extends Component{
                 </div>
             );
         }
-        
     }
 }
 
