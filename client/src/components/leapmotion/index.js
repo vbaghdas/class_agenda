@@ -23,7 +23,12 @@ class LeapMotion extends Component{
                 }
             }else{
                 if(hands.length>0) {
-                    this.detectPosition(hands[0]);
+                    if(this.props.gamemode){
+                        this.detectGameMode(hands);
+                    }else{
+                        this.detectPosition(hands[0]);
+                    }
+                    
                     this.timeStamp = parseInt(new Date().getTime()/1000);
                 }else{
                     var count = parseInt(new Date().getTime()/1000);
@@ -40,10 +45,6 @@ class LeapMotion extends Component{
 
     componentWillMount(){
         this.props.enableGesture(true);
-    }
-
-    analyseGesture(){
-
     }
 
     isPraying(hands){
@@ -85,6 +86,29 @@ class LeapMotion extends Component{
     }
 
 
+    detectGameMode(hands){
+
+        if(hands.length===1){
+            if(hands[0].palmPosition[2] < -150 && this.isMovingFast(hands[0].palmVelocity)){
+                console.log("did cancel");
+                this.props.callback("cancel");
+                return;
+            }
+        }
+
+        let leftest = hands[0];
+        let rightest = hands[0];
+        for(let i = 1; i < hands.length; ++i){
+            if(hands[i].palmPosition[0] < leftest.palmPosition[0]){
+                leftest = hands[i];
+            }
+            if(hands[i].palmPosition[0] > rightest.palmPosition[0]){
+                rightest = hands[i];
+            }
+        }
+
+        this.props.callback(leftest.palmPosition,rightest.palmPosition);
+    }
 
     detectPosition(hand){
         let cmd = "";
@@ -134,7 +158,8 @@ const mapStateToProps = state =>{
     return {
         enable: leap.enable,
         callback: leap.callback,
-        controllable: leap.controllable
+        controllable: leap.controllable,
+        gamemode: leap.gamemode
     };
 }
 

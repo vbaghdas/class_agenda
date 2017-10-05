@@ -10,6 +10,8 @@ export default function(state = DEFAULT_STATE, action){
             return {...state, enable: action.payload, cmd: null};
         case types.ENABLE_GESTURE_CONTROL_PAGE:
             return {...state, controllable: action.payload};
+        case types.ENABLE_GESTURE_GAMEMODE:
+            return {...state, gamemode: action.payload};
         default :
             return state;
     }

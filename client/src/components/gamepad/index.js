@@ -1,4 +1,6 @@
 import React,{Component} from 'react';
+import {connect} from 'react-redux';
+import {enableGesture, enableGameMode, setGestureCallback} from '../../actions'
 import Paddle from './paddle';
 import Ball from './ball';
 import PongStyleSheet from './pong.css';
@@ -18,9 +20,16 @@ class Gamepad extends Component{
         this.speed = 16;
         this.player1_score = null;
         this.player2_score = null;
+        this.player1_score_posx = 200;
+        this.player2_score_posx = 600;
+        this.player_score_posy = 50;
+
+        this.onGesture = this.onGesture.bind(this);
     }
 
     componentDidMount(){
+        this.props.setGestureCallback(this.onGesture);
+        this.props.enableGameMode(true);
         this.initGame();
         this.interval = setInterval(()=>this.update(),30);
         this.serve(1);
@@ -28,6 +37,17 @@ class Gamepad extends Component{
 
     componentWillUnmount(){
         clearInterval(this.interval);
+        this.props.enableGameMode(false);
+    }
+
+    onGesture(left_pos, right_pos){
+        if(left_pos === "cancel"){
+            console.log(this.props);
+            this.props.history.push("/");
+            return;
+        }
+        this.player1.y = 800 - left_pos[1];
+        this.player2.y = 800 - right_pos[1];
     }
 
     update(){
@@ -36,7 +56,7 @@ class Gamepad extends Component{
         this.player2.update();
         this.ball.update();
         this.checkGameState();
-        //this.drawScore(this.ball.getScore());
+        this.drawScore();
     }
 
     checkGameState(){
@@ -71,7 +91,14 @@ class Gamepad extends Component{
 
     }
 
-    collide(paddleXval, paddleYval, paddleWidthVal, paddleHeightVal, ballX, ballY, ballWidth, ballHeight) {
+    collide(paddleXval, 
+            paddleYval, 
+            paddleWidthVal, 
+            paddleHeightVal, 
+            ballX, 
+            ballY, 
+            ballWidth, 
+            ballHeight) {
         if (paddleXval < ballX + ballWidth 
             && paddleYval < ballY + ballHeight 
             && ballX < paddleXval + paddleWidthVal 
@@ -91,8 +118,9 @@ class Gamepad extends Component{
         }
     }
 
-    drawScore(scores){
-
+    drawScore(){
+        this.ctx.fillText(this.player1_score,this.player1_score_posx,this.player_score_posy);
+        this.ctx.fillText(this.player2_score,this.player2_score_posx,this.player_score_posy);
     }
 
     drawBackground(){
@@ -138,4 +166,6 @@ class Gamepad extends Component{
     }
 }
 
-export default Gamepad;
+
+
+export default connect(null,{enableGesture, enableGameMode, setGestureCallback})(Gamepad);

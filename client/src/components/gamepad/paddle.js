@@ -7,7 +7,7 @@ class Paddle {
         this.ctx = props.ctx;
     }
 
-    update(cmd){
+    update(){
         this.draw();
     }
 

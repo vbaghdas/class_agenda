@@ -14,6 +14,13 @@ export function enableGestureControlPage(bool){
     };
 }
 
+export function enableGameMode(bool){
+    return{
+        type: types.ENABLE_GESTURE_GAMEMODE,
+        payload: bool
+    }
+}
+
 export function refreshEventData(eventList){
     return{
         type: types.REFRESH_EVENT,
