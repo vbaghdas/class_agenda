@@ -10,7 +10,10 @@ class LeapMotion extends Component{
         };
 
         this.timeStamp = null;
-        
+        this.detectRange = 300;
+        this.cancel_enter_sensitive = 1;
+        this.gestureLockCountDown = 20;
+
         //maybe should move below to componentWillMount
         this.controller = Leap.loop(this.options, (frame)=> {
             let {enable, controllable} = this.props;
@@ -18,11 +21,12 @@ class LeapMotion extends Component{
             let hands = frame.hands;
             if(!controllable){
                 if(this.isPraying(hands)){
-                    console.log("success again");
+                    console.log("gesture unlocked");
                     this.props.enableGestureControlPage(true);
                 }
             }else{
                 if(hands.length>0) {
+                    console.log("hands number: ", hands.length);
                     if(this.props.gamemode){
                         this.detectGameMode(hands);
                     }else{
@@ -32,9 +36,9 @@ class LeapMotion extends Component{
                     this.timeStamp = parseInt(new Date().getTime()/1000);
                 }else{
                     var count = parseInt(new Date().getTime()/1000);
-                    count = count - this.timeStamp;
-                    console.log(count);
-                    if(count>=20){
+                    count = this.gestureLockCountDown - (count - this.timeStamp);
+                    console.log("lock gesture count down:", count);
+                    if(count<=0){
                         this.props.enableGestureControlPage(false);
                     }
                 }
@@ -49,17 +53,19 @@ class LeapMotion extends Component{
 
     isPraying(hands){
         let result = false;
-        let min = 1000;
         if(hands.length>1){
+            //compare between every hand
             for(let i = 0; i < hands.length; ++i){
                 for(let j = 0; j < hands.length; ++j){
+                    //pass the same hand
                     if(i === j) continue;
                     const dotProduct = this.getDot(hands[i].palmNormal, hands[j].palmNormal);
+                    //if two palms face to each other
                     if(dotProduct <-0.5){
                         const distance = this.getDistance(hands[i].palmPosition, hands[j].palmPosition);
-                        min = distance < min? distance: min;
-                        if(min<50 ){
-                            console.log("success");
+                        //yes, i know this is a magic number
+                        if(distance<50){
+                            console.log("good to see you");
                             return true;
                         }
                     }
@@ -82,32 +88,32 @@ class LeapMotion extends Component{
     }
 
     isMovingFast(velocity){
-        return Math.max(Math.abs(velocity[0]),Math.abs(velocity[1]), Math.abs(velocity[2])) > 1500;
+        return Math.max(Math.abs(velocity[0]),Math.abs(velocity[1]), Math.abs(velocity[2])) > this.cancel_enter_sensitive * 1500;
     }
 
 
     detectGameMode(hands){
 
         if(hands.length===1){
-            if(hands[0].palmPosition[2] < -150 && this.isMovingFast(hands[0].palmVelocity)){
-                console.log("did cancel");
-                this.props.callback("cancel");
+            if(hands[0].palmPosition[1] < this.detectRange && this.isMovingFast(hands[0].palmVelocity)){
+                //parameters: exit, xhigh, xlow
+                this.props.callback(true);
                 return;
             }
         }
 
-        let leftest = hands[0];
-        let rightest = hands[0];
+        let xlow = hands[0];
+        let xhigh = hands[0];
         for(let i = 1; i < hands.length; ++i){
-            if(hands[i].palmPosition[0] < leftest.palmPosition[0]){
-                leftest = hands[i];
+            if(hands[i].palmPosition[0] < xlow.palmPosition[0]){
+                xlow = hands[i];
             }
-            if(hands[i].palmPosition[0] > rightest.palmPosition[0]){
-                rightest = hands[i];
+            if(hands[i].palmPosition[0] > xhigh.palmPosition[0]){
+                xhigh = hands[i];
             }
         }
-
-        this.props.callback(leftest.palmPosition,rightest.palmPosition);
+        //parameters: exit, xhigh, xlow
+        this.props.callback(false, xlow.palmPosition, xhigh.palmPosition);
     }
 
     detectPosition(hand){
@@ -117,25 +123,25 @@ class LeapMotion extends Component{
         let y = hand.palmPosition[1];
         let z = hand.palmPosition[2];
 
-        if(z > 150 && this.isMovingFast(hand.palmVelocity)){
+        if(y > this.detectRange*2 && this.isMovingFast(hand.palmVelocity)){
             cmd += "enter";
             console.log("success enter");
             detected = true;
-        }else if(z < -150 && this.isMovingFast(hand.palmVelocity)){
+        }else if(y < this.detectRange && this.isMovingFast(hand.palmVelocity)){
             cmd += "cancel";
             console.log("success cancel");
             detected = true;
-        }else if(x < -300){
+        }else if(x < -this.detectRange){
             cmd += "-x";
             detected = true;
-        }else if(x > 300){
+        }else if(x > this.detectRange){
             cmd += "x";
             detected = true;
-        }else if(y < 300){
-            cmd += "-y";
+        }else if(z < -this.detectRange){
+            cmd += "-z";
             detected = true;
-        }else if(y > 600){
-            cmd += "y";
+        }else if(z > this.detectRange){
+            cmd += "z";
             detected = true;
         }
 
@@ -146,6 +152,7 @@ class LeapMotion extends Component{
     }
 
     render(){
+        //we should make something visualize here, like gesture lock count down, or gesture is locked or not.
         return (
             <div></div>
         );

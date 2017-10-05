@@ -41,37 +41,39 @@ class Calendar extends Component{
     }
 
     onGesture(cmd){
-        let reset = false;
+
         switch(cmd){
             case "enter":
                 this.toggleModal(this.getCurrentSelectEvent());
-                break;
+                setTimeout( ()=> { this.props.enableGesture(true) }, 1000);
+                return;
             case "cancel":
                 if(this.state.modelIsOpen){
                     this.toggleModal();
                 }else{
                     this.props.history.push("/");
                 }
-                break;
-            case "-x":
-                this.goDirection("left");
-                reset = true;
-                break;
-            case "x":
-                this.goDirection("right");
-                reset = true;
-                break;
-            case "-y":
-                this.goDirection("down");
-                reset = true;
-                break;
-            case "y":
-                this.goDirection("up");
-                reset = true;
-                break;
-            default:
-                break;
+                setTimeout( ()=> { this.props.enableGesture(true) }, 1000);
+                return;
         }
+
+        if(!this.state.modelIsOpen){
+            switch(cmd){
+                case "-x":
+                    this.goDirection("left");
+                    break;
+                case "x":
+                    this.goDirection("right");
+                    break;
+                case "z":
+                    this.goDirection("down");
+                    break;
+                case "-z":
+                    this.goDirection("up");
+                    break;
+            }
+        }
+
         setTimeout( ()=> { this.props.enableGesture(true) }, 500);
 
     }
@@ -96,6 +98,7 @@ class Calendar extends Component{
 
         currentSelectDate.setDate(currentSelectDate.getDate()+offset);
         if(currentSelectDate.getTime()< this.props.startDate.getTime() || currentSelectDate.getTime() > this.props.endDate.getTime() ){
+            console.log("out of calendar range, that's not gonna work");
             currentSelectDate.setDate(currentSelectDate.getDate()-offset);
         }
         this.setState(currentSelectDate);

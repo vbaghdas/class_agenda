@@ -23,7 +23,7 @@ class Gamepad extends Component{
         this.player1_score_posx = 200;
         this.player2_score_posx = 600;
         this.player_score_posy = 50;
-
+        this.playerControlSensitive = 1.5;
         this.onGesture = this.onGesture.bind(this);
     }
 
@@ -40,14 +40,13 @@ class Gamepad extends Component{
         this.props.enableGameMode(false);
     }
 
-    onGesture(left_pos, right_pos){
-        if(left_pos === "cancel"){
-            console.log(this.props);
+    onGesture(exit, xlowHand_pos, xhighHand_pos){
+        if(exit){
             this.props.history.push("/");
             return;
         }
-        this.player1.y = 800 - left_pos[1];
-        this.player2.y = 800 - right_pos[1];
+        this.player1.y = xlowHand_pos[2] * this.playerControlSensitive;
+        this.player2.y = xhighHand_pos[2] * this.playerControlSensitive;
     }
 
     update(){
