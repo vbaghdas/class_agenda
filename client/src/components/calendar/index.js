@@ -27,7 +27,6 @@ class Calendar extends Component{
     getCurrentSelectEvent(){
         let {eventList, currentSelectDate} = this.props;
         for(let i = 0; i < eventList.length; ++i){
-            console.log(eventList[i].formattedDate);
             if(eventList[i].formattedDate.toDateString() === this.state.currentSelectDate.toDateString()){
                 return eventList[i];
             }
