@@ -28,6 +28,12 @@ body {
     opacity: 0.4;
 }
 
+/* Pong Game */
+
+.pongCanvas {
+    display: block;
+    margin: 0 auto;
+}
 
 /*Hamburger Position*/
 

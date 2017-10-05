@@ -7,8 +7,8 @@ import Ball from './ball';
 class Gamepad extends Component{
     constructor(props){
         super(props);
-        this.width = 800;
-        this.height = 600;
+        this.width = 1600;
+        this.height = 895;
         this.canvas = null;
         this.ctx = null;
         this.player1 = null;
@@ -19,9 +19,9 @@ class Gamepad extends Component{
         this.speed = 16;
         this.player1_score = null;
         this.player2_score = null;
-        this.player1_score_posx = 200;
-        this.player2_score_posx = 600;
-        this.player_score_posy = 50;
+        this.player1_score_posx = this.width/4;
+        this.player2_score_posx = this.width/4*3;
+        this.player_score_posy = 80;
         this.playerControlSensitive = 1.5;
         this.onGesture = this.onGesture.bind(this);
     }
@@ -137,14 +137,14 @@ class Gamepad extends Component{
         this.player2_score = 0;
 
         let playerOption = {
-            x: 20,
-            y: 300,
-            width: 20,
-            height: 100,
+            x: this.side,
+            y: this.height/2,
+            width: 30,
+            height: 200,
             ctx: this.ctx
         };
         this.player1 = new Paddle(playerOption);
-        playerOption.x = 760;
+        playerOption.x = this.width- this.side*3;
         this.player2 = new Paddle(playerOption);
         let ballOption = {
             x: 400,
@@ -158,7 +158,7 @@ class Gamepad extends Component{
     render(){
         return (
             <div>
-                <canvas ref="canvas" width={this.width} height={this.height} />
+                <canvas className="pongCanvas" ref="canvas" width={this.width} height={this.height} />
             </div>
         );
     }

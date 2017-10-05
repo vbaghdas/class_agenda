@@ -10,7 +10,7 @@ export default () => (
             <div className="p-4">
                 <Link to="/" className="navbar-brand"><img src={logo}/></Link>
                 <h2 className="text-white text-center">Welcome to the Learning Fuze Dashboard</h2>
-                <h4 className="text-muted text-center">Wave to get started... </h4>
+                <h4 className="text-muted text-center">Clap to get started... </h4>
             </div>
         </div>
         <nav className="navbar navbar-inverse navHomePage">
