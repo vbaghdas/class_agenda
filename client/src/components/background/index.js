@@ -20,12 +20,12 @@ export default Background;
 function run() {
     
         var bg_animated = false;
-        var bg_number_of_curves = 16;
+        var bg_number_of_curves = 10;
     
         var canvas = document.getElementById("animation-canvas");
         var ctx = canvas.getContext("2d");
         window.requestAnimFrame = function (callback) {
-            window.setTimeout(callback, 1000/10);
+            window.setTimeout(callback, 1000/60);
         };
     
         var curves_array = [];
@@ -62,17 +62,17 @@ function run() {
                 var x = 0;
                 var y = 0;
     
-                var abc1xvx = Math.random() * 2 - 1;
-                var abc1xvy = Math.random() * 2 - 1;
+                var abc1xvx = (Math.random() * 2 - 1) * 5 ;
+                var abc1xvy = (Math.random() * 2 - 1) * 5 ;
     
-                var abc1yvx = Math.random() * 2 - 1;
-                var abc1yvy = Math.random() * 2 - 1;
+                var abc1yvx = (Math.random() * 2 - 1) * 5 ;
+                var abc1yvy = (Math.random() * 2 - 1) * 5 ;
     
-                var abc2xvx = Math.random() * 2 - 1;
-                var abc2xvy = Math.random() * 2 - 1;
+                var abc2xvx = (Math.random() * 2 - 1) * 5 ;
+                var abc2xvy = (Math.random() * 2 - 1) * 5 ;
     
-                var abc2yvx = Math.random() * 2 - 1;
-                var abc2yvy = Math.random() * 2 - 1;
+                var abc2yvx = (Math.random() * 2 - 1) * 5 ;
+                var abc2yvy = (Math.random() * 2 - 1) * 5 ;
     
                 curves_array.push(
                     new curve(
@@ -88,7 +88,7 @@ function run() {
         function bgCanvasDraw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-            ctx.lineWidth = 15;
+            ctx.lineWidth = 20;
             ctx.strokeStyle = "#5cb7d6";
     
             for (var i = 0; i < curves_array.length; i++) {
