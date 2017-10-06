@@ -40,16 +40,21 @@ function moveToSelected(element) {
         }
         e.preventDefault();
     });
+
+    // document.addEventListener("DOMContentLoaded", function(event) { 
+    //   $('#carousel div').click(function() {
+    //     console.log("clicked");
+    //     moveToSelected($(this));
+    //   });
+      
+    //   $('#prev').click(function() {
+    //     moveToSelected('prev');
+    //   });
+      
+    //   $('#next').click(function() {
+    //     moveToSelected('next');
+    //   });
+    // });
     
-    $('#carousel div').click(function() {
-      moveToSelected($(this));
-    });
     
-    $('#prev').click(function() {
-      moveToSelected('prev');
-    });
-    
-    $('#next').click(function() {
-      moveToSelected('next');
-    });
     
