@@ -17,7 +17,12 @@ export default class Event_data{
         if (!when) {
             when = props.start.date;
         }
+        //dont ask me why i doing this. i wanna puke
+        when = when.slice(0,10);
         this.formattedDate = new Date(when);
+        //disgusting here
+        //console.log("when: ",when);
+        //console.log("formattedDate: ", this.formattedDate);
         this.formattedDate.setDate(this.formattedDate.getDate()+1);
         this.description = props.description;
         this.parseDescription(props.description);
