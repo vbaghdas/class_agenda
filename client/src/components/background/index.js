@@ -20,12 +20,12 @@ export default Background;
 function run() {
     
         var bg_animated = false;
-        var bg_number_of_curves = 10;
+        var bg_number_of_curves = 6;
     
         var canvas = document.getElementById("animation-canvas");
         var ctx = canvas.getContext("2d");
         window.requestAnimFrame = function (callback) {
-            window.setTimeout(callback, 1000/60);
+            window.setTimeout(callback, 1000/10);
         };
     
         var curves_array = [];
