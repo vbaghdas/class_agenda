@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ModalCSS from './modal.css';
+import EventCSS from '../events/event.css';
 
 class Modal extends Component {
     render() {
@@ -7,29 +9,29 @@ class Modal extends Component {
             return null;
         }
 
-        const { avatarContainer, eventContainer } = {
+        const { eventAvatar, eventCard } = {
             float: 'none'
         };
 
         return (
-            <div className="backdrop" onClick={this.props.onClose}>
-                <div className="modalBody fadeIn">
-                    <div className="eventContainer container">
-                        <div className="row eventRow">
-                            <div className="eventCard">
-                                <div className="avatarContainer col-xs-12" style={avatarContainer}>
+            <div className="modalShadow" onClick={this.props.onClose}>
+                <div className="modalBody">
+                    <div className="container">
+                        <div className="row">
+                            <div className="event">
+                                <div className="eventAvatar col-xs-12" style={eventAvatar}>
                                     <img className="avatar" src={this.props.event.avatar}/>
                                 </div>
-                                <div className="eventCardBody col-xs-12" style={eventContainer}>
-                                    <div className="eventCardBodyTop">
+                                <div className="eventCard col-xs-12" style={eventCard}>
+                                    <div className="eventCardTop">
                                         <span className="company"><img className="companyLogo" src={this.props.event.logo}/>
                                         </span>
                                     </div>
-                                    <div className="eventCardBodyMiddle">
+                                    <div className="eventCardMiddle">
                                         <span className="eventDate">{this.props.event.date}</span>
                                         <span className="eventSpeaker">{this.props.event.name}</span>
                                     </div>
-                                    <div className="eventCardBodyFooter">
+                                    <div className="eventCardFooter">
                                         <span className="eventFacility">{this.props.event.facility}</span>
                                         <span className="eventLocation">{this.props.event.location}</span>
                                     </div>

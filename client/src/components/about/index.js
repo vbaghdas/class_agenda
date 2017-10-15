@@ -23,13 +23,13 @@ class About extends Component{
     render(){
         return(
             <div className='credits'>
-                <div className='project'>Interactive Calendar</div>
+                <div className='project'>interactive calendar</div>
                 <div className='title'>directed by</div>
-                <div className='name'>Vache Baghdassarian</div>
+                <div className='name'>vache baghdassarian</div>
                 <div className='title'>produced by</div>
-                <div className='name'>Jen Hao</div>
+                <div className='name'>jen hao</div>
                 <div className='title'>screenplay by</div>
-                <div className='name'>Carlos Blandino</div>
+                <div className='name'>carlos blandino</div>
                 <div className='title'>project manager</div>
                 <div className='name'>daniel paschal</div>
                 <div className='title'>special thanks to</div>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import EventRow from './eventRow';
+import EventCSS from './event.css';
 import {connect} from 'react-redux';
 import {setGestureCallback, enableGesture} from '../../actions';
 

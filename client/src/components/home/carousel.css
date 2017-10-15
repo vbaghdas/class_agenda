@@ -1,0 +1,54 @@
+/* Carousel Style Sheet */
+.carousel {
+    perspective: 800px!important;
+    margin-top: 100px;
+    transform: scale(1.6);
+    width: 50%;
+    left: 10%;
+}
+.carousel-item {
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+}
+.carousel-item:hover, .carousel-item.active, .indicator-item.active {
+    box-shadow: #5cb7d6 0 0 5px 5px!important;
+}
+.carousel-item > a {
+    color: #fff;
+}
+.carousel-item > a:hover {
+    color: #5cb7d6!important;
+}
+.carousel-item .fa {
+    font-size: 10rem;
+    top: 25%;
+    position: relative;
+}
+.fa:hover {
+    color: #5cb7d6;
+}
+
+/* Navigation Style Sheet */
+.nav-wrapper li {
+    padding-right: 15px;
+}
+.nav-wrapper li a:hover {
+    color: #5cb7d6;
+}
+.nav-wrapper li a.active {
+    color: #5cb7d6;
+    background: rgba(0, 0, 0, 0.2);
+}
+.brand-logo {
+    padding-left: 15px!important;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .carousel {
+        transform: scale(1);
+        margin-top: 0;
+        width: 100%;
+        left: 0;
+    }
+}

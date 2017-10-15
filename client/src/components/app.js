@@ -6,7 +6,7 @@ import Header from './header';
 import Home from './home';
 import Events from './events';
 import Calendar from './calendar';
-import About from './about/index.js';
+import About from './about';
 import Gamepad from './gamepad';
 import Background from './background';
 
@@ -28,7 +28,7 @@ class App extends Component {
                 <Route path="/calendar" component={Calendar} />
                 <Route path="/about" component={About} />
                 <Route path="/gamepad" component={Gamepad} />
-                <Background />
+                {/* <Background /> */}
             </div>
         )
     }

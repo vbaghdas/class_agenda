@@ -1,0 +1,53 @@
+/*Calendar Modal*/
+.modalShadow {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    padding: 50px;
+}
+.modalBody {
+    margin: 100px auto;
+    animation-duration: .5s;
+    animation: fadeIn 0.5s cubic-bezier(0.165, 0.24, 0.44, 1) forwards;
+}
+.modalBody .container {
+    width: 33%;
+}
+.modalBody .event {
+    height: 100%;
+}
+@keyframes fadeIn {
+    0% {
+        transform:scale(0);
+    }
+    100% {
+        transform:scale(1.1);
+    }
+}
+
+/*Media Queries for Responsiveness*/
+@media (max-width: 768px) {
+    .modalBody .container {
+        width: 100%;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .eventCard {
+        height: 26vh!important;
+    } 
+    .modalBody .eventDate {
+        font-size: 1.75vw!important;
+    }
+    .modalBody .eventSpeaker {
+        font-size: 1.75vw!important;
+    }
+    .modalBody .eventFacility {
+        font-size: 1.5vw!important;
+    }
+    .modalBody .eventLocation {
+        font-size: 1.5vw!important;
+    }
+}

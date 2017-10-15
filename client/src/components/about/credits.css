@@ -12,7 +12,7 @@ body {
     text-align: center;
     text-transform: uppercase;
     color: #fff;
-    animation: 60s credits linear infinite;
+    animation: 10s credits linear infinite;
 }
 
 .project {
@@ -32,5 +32,5 @@ body {
 
 @keyframes credits {
     0% { top:  100%; }
-    100% { top: -500%; }
+    100% { top: -100%; }
 }

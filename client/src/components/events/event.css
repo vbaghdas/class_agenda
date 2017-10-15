@@ -1,0 +1,114 @@
+/*Event Card Style Sheet*/
+.container {
+    width: 80vw;
+}
+.row {
+    margin-top: 3vh;
+}
+.event {
+    border-radius: 2px;
+    box-shadow: 10px 15px 34px rgba(0, 0, 0, 1);
+    height: 200px;
+    width: 100%;
+}
+.eventAvatar {
+    float: left;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+.avatar {
+    height: 100%;
+    width: 100%;
+}
+.eventCard {
+    background-color: rgba(34, 34, 34, .9);
+    border-left: 5px solid #5cb7d6;
+    float: left;
+    height: 100%;
+    padding: 5px 15px;
+}
+.companyLogo {
+    height: 4vh;
+}
+.eventCardMiddle {
+    margin-top: 2vh;
+}
+.eventDate {
+    color: #888;
+    font-size: 1.75vw;
+}
+.eventSpeaker {
+    display: block;
+    margin-top: 1vh;
+    font-size: 1.75vw;
+    color: #fff;
+}
+.eventCardBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 15px;
+    width: 100%;
+}
+.eventCardFooter {
+    margin-top: 2vh;
+}
+.eventFacility {
+    color: #5cb7d6;
+    font-size: 1.5vw;
+}
+.eventLocation{
+    color: #5cb7d6;
+    font-size: 1.5vw;
+    float: right;
+}
+
+/*Media Queries for Responsiveness*/
+@media (max-width: 768px) {
+    .eventCard {
+        height: 55%;
+    }
+    .eventDate {
+        font-size: 3.75vw;
+    }
+    .eventSpeaker {
+        font-size: 3vw;
+    }
+    .eventFacility {
+        font-size: 3.5vw;
+    }
+    .eventLocation {
+        font-size: 3.5vw;
+    }
+    .eventCardBottom {
+        position: relative;
+        padding: 0;
+        margin-top: 2vh;
+    }
+    .eventAvatar {
+        height: 100%;
+    }
+}
+@media (max-width: 992px) {
+    .event {
+        height: 80%!important;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .eventCard {
+        height: 30vh!important;
+    }
+    .eventDate {
+        font-size: 3.75vw!important;
+    }
+    .eventSpeaker {
+        font-size: 3vw!important;
+    }
+    .eventFacility {
+        font-size: 3.5vw!important;
+    }
+    .eventLocation {
+        font-size: 3.5vw!important;
+    }
+}

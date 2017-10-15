@@ -157,8 +157,8 @@ class Gamepad extends Component{
 
     render(){
         return (
-            <div>
-                <canvas className="pongCanvas" ref="canvas" width={this.width} height={this.height} />
+            <div className="pong">
+                <canvas className="gameArea col-xs-12" ref="canvas" width={this.width} height={this.height} />
             </div>
         );
     }

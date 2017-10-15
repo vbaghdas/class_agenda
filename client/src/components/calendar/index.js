@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Modal from './modal';
 import CalDay from './calDay';
+import CalendarCSS from './calendar.css';
 import {connect} from 'react-redux';
 import {setGestureCallback, enableGesture, changeGestureMode} from '../../actions';
 
@@ -120,7 +121,7 @@ class Calendar extends Component{
 
     calHeader(){
         let calHeaderRow = [
-            'Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+            'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
         ]
         return calHeaderRow.map((item,index)=>{
             return (
@@ -190,7 +191,7 @@ class Calendar extends Component{
         }else{
             return (
                 <div className="calendar">
-                    <h1 className="text-center mt-5">Loading</h1>
+                    <h1 className="text-center mt-5">Loading...</h1>
                 </div>
             );
         }

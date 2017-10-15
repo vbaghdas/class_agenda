@@ -1,11 +1,9 @@
 import React,{Component} from 'react';
-import SliderCSS from './slider.css';
-import SliderJS from './slider';
-
+import CarouselCSS from './carousel.css';
+import {Carousel} from 'react-materialize';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {enableGesture, setGestureCallback} from '../../actions';
-
 
 class Home extends Component{
 
@@ -44,35 +42,20 @@ class Home extends Component{
 
     render(){
         return (
-            <div className="navIconContainer">
-                <div id="carousel">
-                    <div className="prevLeftSecond navBut">
-                        <div className="navIcon">
-                            <Link to="/about"><i className="fa fa-users" aria-hidden="true"></i></Link>
-                        </div>
-                    </div>
-                    <div className="prev navBut">
-                        <div className="navIcon">
-                            <Link to="/gamepad"><i className="fa fa-gamepad" aria-hidden="true"></i></Link>
-                        </div>
-                    </div>
-                    <div className="selected navBut">
-                        <div className="navIcon">
-                            <Link to="/events"><i className="fa fa-list-ul" aria-hidden="true"></i></Link>
-                        </div>
-                    </div>
-                    <div className="next navBut">
-                        <div className="navIcon">
-                            <Link to="/calendar"><i className="fa fa-calendar" aria-hidden="true"></i></Link>
-                        </div>
-                    </div>
-                    {/* <div className="nextRightSecond navBut">
-                        <div className="navIcon">
-                            <Link to="/facebook"><i className="fa fa-facebook-square" aria-hidden="true"></i></Link>
-                        </div>
-                    </div> */}
+            <Carousel options={{ indicators: true, noWrap: true }}>
+                <div className="carousel-item">
+                    <Link to="/events"><i className="fa fa-list-ul"></i></Link>
                 </div>
-            </div>
+                <div className="carousel-item">
+                    <Link to="/calendar"><i className="fa fa-calendar"></i></Link>
+                </div>
+                <div className="carousel-item">
+                    <Link to="/gamepad"><i className="fa fa-gamepad"></i></Link>
+                </div>
+                <div className="carousel-item">
+                    <Link to="/about"><i className="fa fa-users"></i></Link>
+                </div>
+            </Carousel>
         );
     }
 }

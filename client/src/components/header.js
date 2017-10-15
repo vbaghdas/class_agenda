@@ -1,22 +1,21 @@
 import React from 'react';
 import {
-    Link
+    NavLink, Link 
 } from 'react-router-dom';
+import NavWrapperCSS from '../components/home/carousel.css';
 import logo from '../assets/images/lfz_logo.png';
 
 export default () => (
-    <div className="pos-f-t">
-        <div className="collapse show" id="navbarToggleExternalContent">
-            <div className="p-4">
-                <Link to="/" className="navbar-brand"><img src={logo}/></Link>
-                <h2 className="text-white text-center">Welcome to the Learning Fuze Dashboard</h2>
-                <h4 className="text-muted text-center">Clap to get started... </h4>
-            </div>
-        </div>
-        <nav className="navbar navbar-inverse navHomePage">
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-        </nav>
+<nav>
+    <div className="nav-wrapper grey darken-4">
+        <Link to="/" className="brand-logo"><img src={logo}/></Link>
+        <ul className="right hide-on-med-and-down">
+            <li><NavLink exact to="/"><i className="fa fa-home fa-2x"></i></NavLink></li>
+            <li><NavLink to="/calendar"><i className="fa fa-calendar fa-2x"></i></NavLink></li>
+            <li><NavLink to="/events"><i className="fa fa-list-ul fa-2x"></i></NavLink></li>
+            <li><NavLink to="/gamepad"><i className="fa fa-gamepad fa-2x"></i></NavLink></li>
+            <li><NavLink to="/about"><i className="fa fa-users fa-2x"></i></NavLink></li>
+        </ul>
     </div>
+</nav>
 )
