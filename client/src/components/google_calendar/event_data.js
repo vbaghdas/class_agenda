@@ -1,7 +1,7 @@
 
 // if you want any data from the calendar
 // plz declare it here
-import hashtag_parser from '../helper/hashtag_parser';
+import hashtag_parser from './hashtag_parser';
 
 export default class Event_data{
     
@@ -17,9 +17,13 @@ export default class Event_data{
         if (!when) {
             when = props.start.date;
         }
-        console.log(when);
+        //dont ask me why i doing this. i wanna puke
+        when = when.slice(0,10);
         this.formattedDate = new Date(when);
-        console.log(this.formattedDate);
+        //disgusting here
+        //console.log("when: ",when);
+        //console.log("formattedDate: ", this.formattedDate);
+        this.formattedDate.setDate(this.formattedDate.getDate()+1);
         this.description = props.description;
         this.parseDescription(props.description);
     }
