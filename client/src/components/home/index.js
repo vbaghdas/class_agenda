@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import CarouselCSS from './carousel.css';
-import CarouselJS from './carousel.js';
 import {Carousel} from 'react-materialize';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -10,11 +9,19 @@ class Home extends Component{
 
     constructor(props){
         super(props);
+        this.canPress = true;
         this.onGesture = this.onGesture.bind(this);
+        this.handleKeypress = this.handleKeypress.bind(this);
+
+        this.state = {
+            location: 0
+        }
     }
 
     componentWillMount(){
         this.props.setGestureCallback(this.onGesture);
+
+        document.onkeydown = this.handleKeypress;
     }
 
     onGesture(cmd){
@@ -41,19 +48,55 @@ class Home extends Component{
         document.dispatchEvent(e);
     }
 
+    handleKeypress(e){
+        const { location } = this.state;
+        const carousel = $('.carousel');
+        
+        switch(e.which) {
+            case 37: // left
+                if(this.canPress && location < 3){
+                    this.canPress = false;
+                    carousel.carousel('next');
+                    this.setState( prevState => {
+                        this.canPress = true;
+                        return {location: prevState.location + 1};
+                    });
+                }
+                break;
+
+            case 39: // right
+                console.log('Moving rigth - canPress?', this.canPress);
+                if(this.canPress && location > 0){
+                    this.canPress = false;
+                    carousel.carousel('prev');
+                    this.setState( prevState => {
+                        this.canPress = true;
+                        return {location: prevState.location - 1}
+                    });
+                }
+                break;
+            default: return;
+        }
+        e.preventDefault();
+    }
+
+    setLocation(index){
+        this.setState({location: index});
+    }
+
     render(){
         return (
             <Carousel options={{ indicators: true, noWrap: true }}>
-                <div className="carousel-item">
+                <div className="carousel-item" onClick={() => this.setLocation(0)}>
                     <Link to="/events"><i className="fa fa-list-ul"></i></Link>
                 </div>
-                <div className="carousel-item">
+                <div className="carousel-item" onClick={() => this.setLocation(1)}>
                     <Link to="/calendar"><i className="fa fa-calendar"></i></Link>
                 </div>
-                <div className="carousel-item">
+                <div className="carousel-item" onClick={() => this.setLocation(2)}>
                     <Link to="/gamepad"><i className="fa fa-gamepad"></i></Link>
                 </div>
-                <div className="carousel-item">
+                <div className="carousel-item" onClick={() => this.setLocation(3)}>
                     <Link to="/about"><i className="fa fa-users"></i></Link>
                 </div>
             </Carousel>
