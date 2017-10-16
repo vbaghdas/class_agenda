@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import CarouselCSS from './carousel.css';
+import CarouselJS from './carousel.js';
 import {Carousel} from 'react-materialize';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
