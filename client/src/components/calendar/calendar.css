@@ -24,9 +24,9 @@ tr {
 }
 .calDay {
     padding: 6px;
-    width: 11vw;
-    height: 16vh;
-    border: solid rgba(34, 34, 34, 0.9) 8px;
+    width: 11.5vw;
+    height: 14.5vh;
+    border: solid rgba(34, 34, 34, 0.9) 4px;
     background-color: rgba(0, 0, 0, 0.9);
 }
 .enlarge {
@@ -39,7 +39,7 @@ tr {
         transform:scale(1);
     }
     100% {
-        transform:scale(1.2);
+        transform:scale(1.1);
     }
 }
 
