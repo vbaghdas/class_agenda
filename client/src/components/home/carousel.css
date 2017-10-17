@@ -1,10 +1,9 @@
 /* Carousel Style Sheet */
 .carousel {
     perspective: 800px!important;
-    margin-top: 180px;
-    transform: scale(1.6);
+    transform: scale(1.6) translate(-10%, 30%);
+    margin: 0 auto;
     width: 50%;
-    left: 10%;
 }
 .carousel-item {
     background-color: rgba(0, 0, 0, 0.9);
