@@ -1,7 +1,7 @@
 /* Carousel Style Sheet */
 .carousel {
     perspective: 800px!important;
-    transform: scale(1.6) translate(-5%, 20%);
+    transform: scale(1.6) translate(-10%, 40%);
     margin: 0 auto;
     width: 50%;
 }
