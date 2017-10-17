@@ -1,7 +1,7 @@
 /* Carousel Style Sheet */
 .carousel {
     perspective: 800px!important;
-    margin-top: 100px;
+    margin-top: 180px;
     transform: scale(1.6);
     width: 50%;
     left: 10%;
