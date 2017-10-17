@@ -3,7 +3,7 @@
     width: 80vw;
 }
 .row {
-    margin-top: 3vh;
+    margin-top: 30px;
 }
 .event {
     border-radius: 2px;
@@ -32,16 +32,16 @@
     height: 4vh;
 }
 .eventCardMiddle {
-    margin-top: 2vh;
+    margin-top: 25px;
 }
 .eventDate {
     color: #888;
-    font-size: 28px;
+    font-size: 26px;
 }
 .eventSpeaker {
     display: block;
-    margin-top: 1vh;
-    font-size: 28px;
+    margin-top: 10px;
+    font-size: 26px;
     color: #fff;
 }
 .eventCardBottom {
@@ -52,15 +52,15 @@
     width: 100%;
 }
 .eventCardFooter {
-    margin-top: 2vh;
+    margin-top: 20px;
 }
 .eventFacility {
     color: #5cb7d6;
-    font-size: 25px;
+    font-size: 24px;
 }
 .eventLocation{
     color: #5cb7d6;
-    font-size: 25px;
+    font-size: 24px;
     float: right;
 }
 
