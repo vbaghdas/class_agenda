@@ -14,7 +14,7 @@
     animation: fadeIn 0.5s cubic-bezier(0.165, 0.24, 0.44, 1) forwards;
 }
 .modalBody .container {
-    width: 33%;
+    width: 34%;
 }
 .modalBody .event {
     height: 100%;
@@ -35,7 +35,7 @@
     }
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
-    .eventCard {
+    .modalBody .eventCard {
         height: 26vh!important;
     } 
     .modalBody .eventDate {

@@ -97,7 +97,7 @@
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
     .eventCard {
-        height: 30vh!important;
+        height: 28vh!important;
     }
     .eventDate {
         font-size: 3.75vw!important;
