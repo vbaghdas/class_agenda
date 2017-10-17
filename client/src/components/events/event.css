@@ -8,7 +8,7 @@
 .event {
     border-radius: 2px;
     box-shadow: 10px 15px 34px rgba(0, 0, 0, 1);
-    height: 250px;
+    height: 25vh;
     width: 100%;
 }
 .eventAvatar {
