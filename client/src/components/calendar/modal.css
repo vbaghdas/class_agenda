@@ -13,8 +13,8 @@
     animation: fadeIn 0.5s cubic-bezier(0.165, 0.24, 0.44, 1) forwards;
 }
 .modalBody .container {
-    width: 600px;
-    transform: translate(0, 15%);
+    width: 500px;
+    margin-top: 30px;
 }
 .modalBody .event {
     height: 100%;
