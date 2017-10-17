@@ -4,17 +4,17 @@ tr {
 }
 .calendar {
     display: table;
-    margin: 30px auto;
+    margin: 15px auto;
 }
 .calTable {
     max-width: 80vw;
-    margin: 20px auto;
+    margin: 15px auto;
 }
 .calMonth {
     font-size: 2.5rem;
     color: #5cb7d6;
     justify-content: center;
-    margin: 20px 20px;
+    margin: 15px 15px;
 }
 .calHeaderDay {
     flex-grow: 1;
@@ -23,9 +23,9 @@ tr {
     text-align: center;
 }
 .calDay {
-    padding: 13px;
+    padding: 10px;
     width: 11vw;
-    height: 16vh;
+    height: 15vh;
     border: solid rgba(34, 34, 34, 0.9) 4px;
     background-color: rgba(0, 0, 0, 0.9);
 }
