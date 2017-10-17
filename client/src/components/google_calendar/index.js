@@ -6,7 +6,6 @@ import request from 'superagent';
 import EventData from './event_data';
 
 class GoogleCalendar extends Component{
-
     constructor(props){
         super(props);
         this.option = option;
@@ -34,7 +33,6 @@ class GoogleCalendar extends Component{
         var currentDate = new Date();
         currentDate.setHours(0);
         currentDate.setMinutes(0);
-        console.log(currentDate);
         var maxDate = new Date();
         maxDate.setDate(currentDate.getDate()+option.loadLength);
         this.props.setEventDateRange(currentDate, maxDate);

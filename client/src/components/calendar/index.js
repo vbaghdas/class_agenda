@@ -12,6 +12,9 @@ class Calendar extends Component{
         this.onGesture = this.onGesture.bind(this);
         this.calDay = this.calDay.bind(this);
         this.getCurrentSelectEvent = this.getCurrentSelectEvent.bind(this);
+        this.changeDate = this.changeDate.bind(this);
+        this.previousMonth = this.previousMonth.bind(this);
+        this.nextMonth = this.nextMonth.bind(this);
 
         let now = new Date();
         this.sunday = 0;
@@ -41,7 +44,6 @@ class Calendar extends Component{
     }
 
     onGesture(cmd){
-
         switch(cmd){
             case "enter":
                 this.toggleModal(this.getCurrentSelectEvent());
@@ -93,15 +95,27 @@ class Calendar extends Component{
                 offset = -this.weekLength;
                 break;
         }
-        let {currentSelectDate} = this.state;
+        this.changeDate(false, offset);
+    };
 
-        currentSelectDate.setDate(currentSelectDate.getDate()+offset);
+    changeDate(isMonth, offset){
+        let {currentSelectDate} = this.state;
+        isMonth? currentSelectDate.setMonth(currentSelectDate.getMonth()+offset) : currentSelectDate.setDate(currentSelectDate.getDate()+offset);
         if(currentSelectDate.getTime()< this.props.startDate.getTime() || currentSelectDate.getTime() > this.props.endDate.getTime() ){
             console.log("out of calendar range, that's not gonna work");
-            currentSelectDate.setDate(currentSelectDate.getDate()-offset);
+            isMonth? currentSelectDate.setMonth(currentSelectDate.getMonth()-offset) : currentSelectDate.setDate(currentSelectDate.getDate()-offset);
+            return;
         }
         this.setState(currentSelectDate);
-    };
+    }
+
+    previousMonth() {
+        this.changeDate(true, -1);
+    }
+    nextMonth() {
+        this.changeDate(true, +1);
+    }
+
 
     toggleModal = (event) => {
         if(event === null){return};
@@ -179,13 +193,16 @@ class Calendar extends Component{
                 <div className="calendar">
                     <table>
                         <tbody>
-                            <tr className="calMonth">{this.calMonth()}</tr>
+                            <tr className="calMonth">
+                                <td className="material-icons" onClick={this.previousMonth}>arrow_back</td>
+                                    {this.calMonth()}
+                                <td className="material-icons" onClick={this.nextMonth}>arrow_forward</td>
+                            </tr>
                             <tr className="calHeaderRow">{this.calHeader()}</tr>
                             {this.calDay()}
                         </tbody>
                     </table>
-                    <Modal show={this.state.modelIsOpen} onClose={this.toggleModal} event={this.state.currentSelectEvent}>
-                    </Modal>
+                    <Modal show={this.state.modelIsOpen} onClose={this.toggleModal} event={this.state.currentSelectEvent}></Modal>
                 </div>
             );
         }else{

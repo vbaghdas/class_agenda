@@ -16,7 +16,7 @@ class Gamepad extends Component{
         this.ball = null;
         this.interval = null;
         this.side = 20;
-        this.speed = 16;
+        this.speed = 35;
         this.player1_score = null;
         this.player2_score = null;
         this.player1_score_posx = this.width/4;
@@ -24,6 +24,7 @@ class Gamepad extends Component{
         this.player_score_posy = 80;
         this.playerControlSensitive = 1.5;
         this.onGesture = this.onGesture.bind(this);
+        this.onMouseMove = this.onMouseMove.bind(this);
     }
 
     componentDidMount(){
@@ -154,16 +155,19 @@ class Gamepad extends Component{
         }
         this.ball = new Ball(ballOption);
     }
+    
+    onMouseMove(e){
+        this.player1.y = e.clientY * 1.5 - 300;
+        this.player2.y = e.clientY * 1.5 - 300;
+    }
 
     render(){
         return (
-            <div className="pong">
+            <div className="pong" onMouseMove={this.onMouseMove}>
                 <canvas className="gameArea col-xs-12" ref="canvas" width={this.width} height={this.height} />
             </div>
         );
     }
 }
-
-
 
 export default connect(null,{enableGesture, enableGameMode, setGestureCallback})(Gamepad);

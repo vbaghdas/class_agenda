@@ -25,7 +25,6 @@ class Events extends Component {
     }
 
     getRows(){
-        console.log(this.props);
         let {eventList} = this.props;
         let rows = [];
         if(eventList){

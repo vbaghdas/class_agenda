@@ -1,8 +1,8 @@
 /* Carousel Style Sheet */
 .carousel {
     perspective: 800px!important;
-    transform: scale(1.6) translate(-10%, 35%);
-    margin: 0 auto;
+    transform: scale(1.6) translate(-20%);
+    margin: 20vh auto;
     width: 50%;
 }
 .carousel-item {
@@ -15,15 +15,12 @@
 .carousel-item > a {
     color: #fff;
 }
-.carousel-item > a:hover {
-    color: #5cb7d6!important;
-}
-.carousel-item .fa {
+.carousel-item a .fa {
     font-size: 10rem;
     top: 25%;
     position: relative;
 }
-.fa:hover {
+.carousel-item > a .fa:hover {
     color: #5cb7d6;
 }
 
@@ -38,7 +35,7 @@
     color: #5cb7d6;
     background: rgba(0, 0, 0, 0.2);
 }
-.brand-logo {
+.nav-wrapper .brand-logo {
     padding-left: 15px!important;
 }
 
