@@ -3,7 +3,7 @@
     width: 80vw;
 }
 .row {
-    margin-top: 3vh;
+    margin-top: 20px;
 }
 .event {
     border-radius: 2px;
@@ -32,7 +32,7 @@
     height: 4vh;
 }
 .eventCardMiddle {
-    margin-top: 2vh;
+    margin-top: 25px;
 }
 .eventDate {
     color: #888;
@@ -40,7 +40,7 @@
 }
 .eventSpeaker {
     display: block;
-    margin-top: 1vh;
+    margin-top: 10px;
     font-size: 26px;
     color: #fff;
 }
@@ -52,7 +52,7 @@
     width: 100%;
 }
 .eventCardFooter {
-    margin-top: 2vh;
+    margin-top: 20px;
 }
 .eventFacility {
     color: #5cb7d6;
