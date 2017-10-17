@@ -20,7 +20,6 @@ class Home extends Component{
 
     componentWillMount(){
         this.props.setGestureCallback(this.onGesture);
-
         document.onkeydown = this.handleKeypress;
     }
 
