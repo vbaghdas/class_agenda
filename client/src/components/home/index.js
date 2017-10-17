@@ -20,13 +20,12 @@ class Home extends Component{
 
     componentWillMount(){
         this.props.setGestureCallback(this.onGesture);
-
         document.onkeydown = this.handleKeypress;
     }
 
     onGesture(cmd){
         if(cmd === "enter"){
-            let path = document.querySelector(".selected a").getAttribute("href");
+            let path = document.querySelector(".carousel-item.active a").getAttribute("href");
             this.props.history.push(path);
         }else if(cmd === "-x"){
             this.pressRightArrow();
