@@ -12,7 +12,6 @@ class Home extends Component{
         this.canPress = true;
         this.onGesture = this.onGesture.bind(this);
         this.handleKeypress = this.handleKeypress.bind(this);
-
         this.state = {
             location: 0
         }
@@ -20,7 +19,6 @@ class Home extends Component{
 
     componentWillMount(){
         this.props.setGestureCallback(this.onGesture);
-
         document.onkeydown = this.handleKeypress;
     }
 
@@ -65,7 +63,6 @@ class Home extends Component{
                 break;
 
             case 39: // right
-                console.log('Moving rigth - canPress?', this.canPress);
                 if(this.canPress && location > 0){
                     this.canPress = false;
                     carousel.carousel('prev');
