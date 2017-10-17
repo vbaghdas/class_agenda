@@ -36,7 +36,7 @@
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
     .modalBody .eventCard {
-        height: 26vh!important;
+        height: 23vh!important;
     } 
     .modalBody .eventDate {
         font-size: 1.75vw!important;
