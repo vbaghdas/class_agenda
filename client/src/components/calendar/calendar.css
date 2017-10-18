@@ -19,6 +19,10 @@ tr {
 td.material-icons {
     font-size: 40px;
     color: #5cb7d6;
+    cursor: pointer;
+}
+td.material-icons:hover {
+    color: #FFF;
 }
 .calHeaderDay {
     flex-grow: 1;
