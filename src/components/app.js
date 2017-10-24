@@ -28,7 +28,7 @@ class App extends Component {
                 <Route path="/calendar" component={Calendar} />
                 <Route path="/about" component={About} />
                 <Route path="/gamepad" component={Gamepad} />
-                {/* <Background /> */}
+                <Background />
             </div>
         )
     }
