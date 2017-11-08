@@ -150,6 +150,12 @@ class LeapMotion extends Component{
             this.props.enableGesture(false);
         }
     }
+
+    render(){
+        return (
+            <div></div>
+        );
+    }
 }
 
 const mapStateToProps = state =>{

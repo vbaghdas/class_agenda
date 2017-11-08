@@ -2,7 +2,7 @@
 .carousel {
     perspective: 800px!important;
     transform: scale(1.6) translate(-20%);
-    margin: 20vh auto;
+    margin: 18vh auto;
     width: 50%;
 }
 .carousel-item {
