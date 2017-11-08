@@ -64,7 +64,7 @@
     float: right;
 }
 
-/*Media Queries for Responsiveness*/
+/* Mobile Responsive */
 @media (max-width: 768px) {
     .eventCard {
         height: 55%;

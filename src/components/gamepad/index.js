@@ -1,10 +1,11 @@
-import React,{Component} from 'react';
-import {connect} from 'react-redux';
-import {enableGesture, enableGameMode, setGestureCallback} from '../../actions'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { enableGesture, enableGameMode, setGestureCallback } from '../../actions'
 import Paddle from './paddle';
 import Ball from './ball';
 
 class Gamepad extends Component{
+
     constructor(props){
         super(props);
         this.width = 1600;
@@ -59,7 +60,6 @@ class Gamepad extends Component{
     }
 
     checkGameState(){
-
         let {ball, player1, player2, width, height, side, speed} = this;
 
         if (0 > ball.y || ball.y+ side > height) {

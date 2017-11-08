@@ -1,9 +1,9 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import CarouselCSS from './carousel.css';
-import {Carousel} from 'react-materialize';
+import { Carousel } from 'react-materialize';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
-import {enableGesture, setGestureCallback} from '../../actions';
+import { connect } from 'react-redux';
+import { enableGesture, setGestureCallback } from '../../actions';
 
 class Home extends Component{
 

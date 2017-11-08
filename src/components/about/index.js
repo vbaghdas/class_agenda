@@ -1,7 +1,7 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import Credits from './credits.css';
-import {connect} from 'react-redux';
-import {enableGesture, setGestureCallback} from '../../actions';
+import { connect } from 'react-redux';
+import { enableGesture, setGestureCallback } from '../../actions';
 
 class About extends Component{
     constructor(props){

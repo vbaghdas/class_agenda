@@ -6,6 +6,7 @@ import request from 'superagent';
 import EventData from './event_data';
 
 class GoogleCalendar extends Component{
+    
     constructor(props){
         super(props);
         this.option = option;

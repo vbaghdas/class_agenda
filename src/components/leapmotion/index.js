@@ -3,6 +3,7 @@ import {enableGesture, enableGestureControlPage} from '../../actions';
 import {connect} from 'react-redux';
 
 class LeapMotion extends Component{
+
     constructor(props){
         super(props);
         this.options = {
@@ -93,7 +94,6 @@ class LeapMotion extends Component{
 
 
     detectGameMode(hands){
-
         if(hands.length===1){
             if(hands[0].palmPosition[1] < this.detectRange && this.isMovingFast(hands[0].palmVelocity)){
                 //parameters: exit, xhigh, xlow
@@ -150,15 +150,7 @@ class LeapMotion extends Component{
             this.props.enableGesture(false);
         }
     }
-
-    render(){
-        //we should make something visualize here, like gesture lock count down, or gesture is locked or not.
-        return (
-            <div></div>
-        );
-    }
 }
-
 
 const mapStateToProps = state =>{
     var {leap} = state;
@@ -170,5 +162,4 @@ const mapStateToProps = state =>{
     };
 }
 
-
-export default connect(mapStateToProps, {enableGesture, enableGestureControlPage})(LeapMotion);
+export default connect(mapStateToProps, { enableGesture, enableGestureControlPage })(LeapMotion);

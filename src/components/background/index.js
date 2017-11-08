@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class Background extends Component{
-
     componentDidMount(){
         run();
     }
@@ -18,7 +17,6 @@ class Background extends Component{
 export default Background;
 
 function run() {
-    
         var bg_animated = false;
         var bg_number_of_curves = 6;
     

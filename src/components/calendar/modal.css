@@ -28,7 +28,7 @@
     }
 }
 
-/*Media Queries for Responsiveness*/
+/* Mobile Responsive */
 @media (max-width: 768px) {
     .modalBody .container {
         width: 100%;

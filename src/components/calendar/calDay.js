@@ -8,7 +8,6 @@ class CalDay extends Component {
         this.onOut = this.onOut.bind(this);
     }
 
-
     onHover(){
         this.setState({ishover:true});
     }

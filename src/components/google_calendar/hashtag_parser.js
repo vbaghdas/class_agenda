@@ -1,14 +1,14 @@
-/*input example :
+/* Input Example :
 
-You can put things like this format : #someProperty:someValue# ,
-for example : #name:James#
+You can insert descriptions in this format : #someProperty:someValue#
+For Example : #name:Vache#
 
 Any # doesn't follow that format will just behave like a normal #
 
 You can also use the same property name multiple times, and they will be saved into an array,
 just like this ===> #logo:some.jpg# and #logo:other.jpg# 
 
-And all the others text without that format will just go into description property
+And all the others text without that format will just go into the description property
 
 return an object, example:
 [object Object] {
@@ -20,7 +20,7 @@ return an object, example:
 */
 
 export default function hashtag_parser(str){
-
+    
     if(!str || str.constructor !== String){
         return null;
     }

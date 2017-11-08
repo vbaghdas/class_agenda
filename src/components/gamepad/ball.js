@@ -8,13 +8,7 @@ class Ball {
         this.side = props.side;
         this.ctx = props.ctx;
     }
-
-    getScore(){
-
-    }
-
     
-
     update(){
         this.x += this.velocity.x;
         this.y += this.velocity.y;

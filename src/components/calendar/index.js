@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Modal from './modal';
 import CalDay from './calDay';
 import CalendarCSS from './calendar.css';
-import {connect} from 'react-redux';
-import {setGestureCallback, enableGesture, changeGestureMode} from '../../actions';
+import { connect } from 'react-redux';
+import { setGestureCallback, enableGesture, changeGestureMode } from '../../actions';
 
 class Calendar extends Component{
     constructor(props){
