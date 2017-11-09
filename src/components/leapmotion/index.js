@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import {enableGesture, enableGestureControlPage} from '../../actions';
-import {connect} from 'react-redux';
+import { enableGesture, enableGestureControlPage } from '../../actions';
+import { connect } from 'react-redux';
 
 class LeapMotion extends Component{
-
     constructor(props){
         super(props);
         this.options = {
@@ -91,7 +90,6 @@ class LeapMotion extends Component{
     isMovingFast(velocity){
         return Math.max(Math.abs(velocity[0]),Math.abs(velocity[1]), Math.abs(velocity[2])) > this.cancel_enter_sensitive * 1500;
     }
-
 
     detectGameMode(hands){
         if(hands.length===1){

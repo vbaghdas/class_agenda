@@ -20,7 +20,6 @@ return an object, example:
 */
 
 export default function hashtag_parser(str){
-    
     if(!str || str.constructor !== String){
         return null;
     }
@@ -57,6 +56,5 @@ export default function hashtag_parser(str){
             result[prop] = values[i];
         }
     }
-
     return result;
 }

@@ -1,3 +1,9 @@
+/*==========================================================
+
+            Body, Background Animation, Game Area
+
+===========================================================*/
+
 body {
     background: #222;
     color: #fff;
@@ -5,8 +11,6 @@ body {
     padding: 0;
     overflow: hidden;
 }
-
-/*Background Animation*/
 #animation-wrap {
     position: absolute;
     height: 100%;

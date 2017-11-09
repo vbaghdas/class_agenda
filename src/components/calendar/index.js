@@ -25,6 +25,8 @@ class Calendar extends Component{
         this.state = { 
             modelIsOpen: false,
             currentSelectDate: now,
+            mutePreviousMonth: '',
+            muteNextMonth: ''
          };
     }
 
@@ -75,7 +77,6 @@ class Calendar extends Component{
                     break;
             }
         }
-
         setTimeout( ()=> { this.props.enableGesture(true) }, 500);
     }
 
@@ -99,14 +100,25 @@ class Calendar extends Component{
     };
 
     changeDate(isMonth, offset){
-        let {currentSelectDate} = this.state;
+        let { currentSelectDate } = this.state;
+        const calendarRange = {};
         isMonth? currentSelectDate.setMonth(currentSelectDate.getMonth()+offset) : currentSelectDate.setDate(currentSelectDate.getDate()+offset);
-        if(currentSelectDate.getTime()< this.props.startDate.getTime() || currentSelectDate.getTime() > this.props.endDate.getTime() ){
-            console.log("out of calendar range, that's not gonna work");
+        if( currentSelectDate.getTime() < this.props.startDate.getTime() || currentSelectDate.getTime() > this.props.endDate.getTime() ){
+            if( currentSelectDate.getTime() < this.props.startDate.getTime() ){
+                calendarRange.mutePreviousMonth = 'grey-text'
+            }
+            if( currentSelectDate.getTime() > this.props.endDate.getTime() ){
+                calendarRange.muteNextMonth = 'grey-text'
+            }
             isMonth? currentSelectDate.setMonth(currentSelectDate.getMonth()-offset) : currentSelectDate.setDate(currentSelectDate.getDate()-offset);
+            this.setState(calendarRange);
             return;
         }
-        this.setState(currentSelectDate);
+        this.setState({
+            currentSelectDate,
+            mutePreviousMonth: '',
+            muteNextMonth: ''
+        });
     }
 
     previousMonth() {
@@ -116,9 +128,8 @@ class Calendar extends Component{
         this.changeDate(true, +1);
     }
 
-
     toggleModal = (event) => {
-        if(event === null){return};
+        if(event === null) {return};
         this.setState({
             modelIsOpen: !this.state.modelIsOpen,
             currentSelectEvent: event
@@ -136,10 +147,10 @@ class Calendar extends Component{
     calHeader(){
         let calHeaderRow = [
             'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-        ]
+        ];
         return calHeaderRow.map((item,index)=>{
             return (
-            <td className="calHeaderDay" key={index}>{item}</td>
+                <td className="calHeaderDay" key={index}>{item}</td>
             );
         });
     }
@@ -151,7 +162,6 @@ class Calendar extends Component{
         startDate.setDate(1+offset);
         let dayArr = [];
         for(let i = 0; i < this.weekLength * this.rowsCount; ++i){
-            // hard code the month
             dayArr.push(new Date(startDate));
             startDate.setDate(startDate.getDate()+1);
         }
@@ -194,9 +204,9 @@ class Calendar extends Component{
                     <table>
                         <tbody>
                             <tr className="calMonth">
-                                <td className="material-icons" onClick={this.previousMonth}>arrow_back</td>
+                                <td className={"material-icons arrow " + this.state.mutePreviousMonth } onClick={this.previousMonth}>arrow_back</td>
                                     {this.calMonth()}
-                                <td className="material-icons" onClick={this.nextMonth}>arrow_forward</td>
+                                <td className={"material-icons arrow " + this.state.muteNextMonth } onClick={this.nextMonth}>arrow_forward</td>
                             </tr>
                             <tr className="calHeaderRow">{this.calHeader()}</tr>
                             {this.calDay()}

@@ -5,7 +5,6 @@ import Paddle from './paddle';
 import Ball from './ball';
 
 class Gamepad extends Component{
-
     constructor(props){
         super(props);
         this.width = 1600;

@@ -1,10 +1,8 @@
-
 // If you want any data from the calendar
 // Please declare it here
 import hashtag_parser from './hashtag_parser';
 
 export default class Event_data{
-    
     constructor(props){
         this.id = props.id;
         this.logo = null;

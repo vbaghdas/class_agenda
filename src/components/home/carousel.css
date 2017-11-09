@@ -1,4 +1,8 @@
-/* Carousel Style Sheet */
+/*==========================================================
+
+                    Carousel and NavBar
+
+===========================================================*/
 .carousel {
     perspective: 800px!important;
     transform: scale(1.6) translate(-20%);
@@ -24,7 +28,7 @@
     color: #5cb7d6;
 }
 
-/* Navigation Style Sheet */
+/* NavBar */
 .nav-wrapper li {
     padding-right: 15px;
 }

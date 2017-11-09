@@ -1,4 +1,8 @@
-/*Calendar Style Sheet*/
+/*==========================================================
+
+            Calendar, Header, Month, Day, Icons
+
+===========================================================*/
 tr {
     display: flex;
 }
@@ -15,6 +19,9 @@ tr {
     color: #5cb7d6;
     justify-content: center;
     margin: 15px;
+}
+.calMonth .arrow {
+    margin: 0 25px 0 25px;
 }
 td.material-icons {
     font-size: 40px;
@@ -51,7 +58,7 @@ td.material-icons:hover {
     }
 }
 
-/*Media Queries for Responsiveness*/
+/* Mobile Responsive */
 @media (max-width: 768px) {
     .calDay {
         padding: 6px;

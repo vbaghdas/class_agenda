@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import { setGestureCallback, enableGesture } from '../../actions';
 
 class Events extends Component {
-
     constructor(props){
         super(props);
         this.onGesture = this.onGesture.bind(this);
@@ -40,7 +39,6 @@ class Events extends Component {
         });
     }
     
-
     render(){
         return(
             <div>
