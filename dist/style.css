@@ -11,6 +11,9 @@ body {
     padding: 0;
     overflow: hidden;
 }
+nav {
+    z-index: 1;
+}
 #animation-wrap {
     position: absolute;
     height: 100%;
