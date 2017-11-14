@@ -21,19 +21,21 @@ class About extends Component{
     }
 
     render(){
-        return(
-            <div className='credits'>
-                <div className='project'>interactive calendar</div>
-                <div className='title'>directed by</div>
-                <div className='name'>vache baghdassarian</div>
-                <div className='title'>produced by</div>
-                <div className='name'>jen hao</div>
-                <div className='title'>screenplay by</div>
-                <div className='name'>carlos blandino</div>
-                <div className='title'>project manager</div>
-                <div className='name'>daniel paschal</div>
-                <div className='title'>special thanks to</div>
-                <div className='name'>leap motion technologies</div>
+        return (
+            <div className="credits-container">
+                <div className='credits'>
+                    <div className='project'>interactive calendar</div>
+                    <div className='title'>directed by</div>
+                    <div className='name'>vache baghdassarian</div>
+                    <div className='title'>produced by</div>
+                    <div className='name'>jen hao</div>
+                    <div className='title'>screenplay by</div>
+                    <div className='name'>carlos blandino</div>
+                    <div className='title'>project manager</div>
+                    <div className='name'>daniel paschal</div>
+                    <div className='title'>special thanks to</div>
+                    <div className='name'>leap motion technologies</div>
+                </div>
             </div>
         );
     }

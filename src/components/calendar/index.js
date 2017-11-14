@@ -18,7 +18,7 @@ class Calendar extends Component{
 
         let now = new Date();
         this.sunday = 0;
-        this.rowsCount = 5;
+        this.rowsCount = 6;
         this.weekLength = 7;
         this.monthLength = 3;
 
@@ -150,7 +150,7 @@ class Calendar extends Component{
         ];
         return calHeaderRow.map((item,index)=>{
             return (
-                <td className="calHeaderDay" key={index}>{item}</td>
+                <td className="calendar-header" key={index}>{item}</td>
             );
         });
     }
@@ -191,7 +191,7 @@ class Calendar extends Component{
         }
         rowArr = rowArr.map((item,index)=>{
             return (
-            <tr className="calDayRow" key = {index}>{item}</tr>
+            <tr className="calendar-day-row" key = {index}>{item}</tr>
             );
         });
         return rowArr;
@@ -200,25 +200,25 @@ class Calendar extends Component{
     render() {
         if(this.props.eventList){
             return (
-                <div className="calendar">
+                <div className="container calendar-container">
                     <table>
                         <tbody>
-                            <tr className="calMonth">
+                            <tr className="calendar-month-row">
                                 <td className={"material-icons arrow " + this.state.mutePreviousMonth } onClick={this.previousMonth}>arrow_back</td>
                                     {this.calMonth()}
                                 <td className={"material-icons arrow " + this.state.muteNextMonth } onClick={this.nextMonth}>arrow_forward</td>
                             </tr>
-                            <tr className="calHeaderRow">{this.calHeader()}</tr>
+                            <tr className="calendar-header-row">{this.calHeader()}</tr>
                             {this.calDay()}
                         </tbody>
                     </table>
                     <Modal show={this.state.modelIsOpen} onClose={this.toggleModal} event={this.state.currentSelectEvent}></Modal>
                 </div>
             );
-        }else{
+        } else {
             return (
-                <div className="calendar">
-                    <h1 className="text-center mt-5">Loading...</h1>
+                <div className="container calendar-container">
+                    <h1 className="center-align">Loading...</h1>
                 </div>
             );
         }

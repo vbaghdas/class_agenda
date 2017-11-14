@@ -7,15 +7,15 @@ import Ball from './ball';
 class Gamepad extends Component{
     constructor(props){
         super(props);
-        this.width = 1600;
-        this.height = 895;
+        this.width = 1280;
+        this.height = 880;
         this.canvas = null;
         this.ctx = null;
         this.player1 = null;
         this.player2 = null;
         this.ball = null;
         this.interval = null;
-        this.side = 20;
+        this.side = 15;
         this.speed = 35;
         this.player1_score = null;
         this.player2_score = null;
@@ -139,8 +139,8 @@ class Gamepad extends Component{
         let playerOption = {
             x: this.side,
             y: this.height/2,
-            width: 30,
-            height: 200,
+            width: 25,
+            height: 150,
             ctx: this.ctx
         };
         this.player1 = new Paddle(playerOption);
@@ -161,9 +161,14 @@ class Gamepad extends Component{
     }
 
     render(){
+        const canvas = {
+            margin: '30px auto',
+            width: '100%'
+        }
+
         return (
-            <div className="pong" onMouseMove={this.onMouseMove}>
-                <canvas className="gameArea col-xs-12" ref="canvas" width={this.width} height={this.height} />
+            <div className="container" onMouseMove={this.onMouseMove}>
+                <canvas style={canvas} ref="canvas" width={this.width} height={this.height} />
             </div>
         );
     }

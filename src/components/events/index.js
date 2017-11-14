@@ -24,8 +24,9 @@ class Events extends Component {
     }
 
     getRows(){
-        let {eventList} = this.props;
-        let rows = [];
+        const {eventList} = this.props;
+        console.log(eventList);
+        const rows = [];
         if(eventList){
             var i = 0;
             while(eventList[i] && i < this.maxResult){
@@ -35,13 +36,13 @@ class Events extends Component {
         }
         
         return rows.map((item,index)=>{
-            return <EventRow event={item} key={index}/>
+            return <EventRow event={item} key={index} />
         });
     }
     
     render(){
         return(
-            <div>
+            <div className="container">
                 {this.getRows()}
             </div>
         );   

@@ -3,44 +3,61 @@
                     Carousel and NavBar
 
 ===========================================================*/
+
 .carousel {
     perspective: 800px!important;
     transform: scale(1.6) translate(-20%);
-    margin: 18vh auto;
+    margin: 15vh auto;
     width: 50%;
 }
+
 .carousel-item {
     background-color: rgba(0, 0, 0, 0.9);
     text-align: center;
 }
+
 .carousel-item:hover, .carousel-item.active, .indicator-item.active {
     box-shadow: #5cb7d6 0 0 5px 5px!important;
 }
+
 .carousel-item > a {
     color: #fff;
 }
+
 .carousel-item a .fa {
-    font-size: 10rem;
-    top: 25%;
+    font-size: 8rem;
+    top: 21%;
     position: relative;
 }
+
 .carousel-item > a .fa:hover {
     color: #5cb7d6;
 }
 
 /* NavBar */
+nav {
+    background-color: #212121!important;
+}
+.nav-wrapper {
+    z-index: 1;
+    overflow: hidden;
+}
+
 .nav-wrapper li {
     padding-right: 15px;
 }
+
 .nav-wrapper li a:hover {
     color: #5cb7d6;
 }
+
 .nav-wrapper li a.active {
     color: #5cb7d6;
     background: rgba(0, 0, 0, 0.2);
 }
-.nav-wrapper .brand-logo {
-    padding-left: 15px!important;
+
+.nav-logo {
+    padding: 10px;
 }
 
 /* Media Queries for Responsiveness */

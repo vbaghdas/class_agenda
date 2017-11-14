@@ -10,18 +10,22 @@
     text-transform: uppercase;
     animation: 10s credits linear infinite;
 }
+
 .project {
     margin-bottom: 50px;
     font-size: 50px;
 }
+
 .title {
     margin-bottom: 5px;
     font-size: 18px;
 }
+
 .name {
     margin-bottom: 50px;
     font-size: 35px;
 }
+
 @keyframes credits {
     0% { top:  100%; }
     100% { top: -100%; }

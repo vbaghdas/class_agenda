@@ -3,52 +3,55 @@
             Calendar, Header, Month, Day, Icons
 
 ===========================================================*/
+
 tr {
     display: flex;
 }
-.calendar {
-    display: table;
-    margin: 15px auto;
+
+.calendar-container {
+    width: 70%;
 }
-.calTable {
-    max-width: 80vw;
-    margin: 15px auto;
-}
-.calMonth {
+
+.calendar-month-row {
     font-size: 28px;
     color: #5cb7d6;
     justify-content: center;
-    margin: 15px;
+    margin-top: 5px;
 }
-.calMonth .arrow {
-    margin: 0 25px 0 25px;
-}
-td.material-icons {
+
+.calendar-month-row .arrow {
+    margin: 0 5px 0 5px;
     font-size: 40px;
     color: #5cb7d6;
     cursor: pointer;
 }
-td.material-icons:hover {
-    color: #FFF;
-}
-.calHeaderDay {
+
+.calendar-header {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
     text-align: center;
 }
-.calDay {
+
+.calendar-day {
     padding: 12px;
-    width: 11vw;
-    height: 15.5vh;
+    width: 10vw;
+    height: 7vw;
     border: solid rgba(34, 34, 34, 0.9) 3px;
     background-color: rgba(0, 0, 0, 0.9);
 }
+
+.calendar-day .avatar {
+    height: 100%;
+    width: 100%;
+}
+
 .enlarge {
     animation: enlarge 0.5s forwards;
     box-shadow: #5cb7d6 0 0 5px 5px;
     border: 0;
 }
+
 @keyframes enlarge {
     0% {
         transform:scale(1);
@@ -60,11 +63,20 @@ td.material-icons:hover {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    .calDay {
-        padding: 6px;
+    .calendar-container {
+        width: 100%!important;
+    }
+
+    .calendar-month-row {
+        margin-top: 30px;
+    }
+
+    .calendar-day {
+        text-align: center;
+        padding: 5px;
         width: 14vw;
-        height: 7vh;
-        font-size: 3vw;
+        height: 11vw;
+        font-size: 5.25vw;
         border: solid rgba(34, 34, 34, 0.9) 5px;
     }
 }

@@ -8,7 +8,9 @@ import logo from '../assets/images/lfz_logo.png';
 export default () => (
 <nav>
     <div className="nav-wrapper grey darken-4">
-        <Link to="/" className="brand-logo"><img src={logo}/></Link>
+        <Link to="/" className="brand-logo">
+            <img className="nav-logo" src={logo}/>
+        </Link>
         <ul className="right hide-on-med-and-down">
             <li><NavLink exact to="/"><i className="fa fa-home fa-2x"></i></NavLink></li>
             <li><NavLink to="/events"><i className="fa fa-list-ul fa-2x"></i></NavLink></li>

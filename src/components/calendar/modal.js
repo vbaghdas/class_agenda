@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ModalCSS from './modal.css';
-import EventCSS from '../events/event.css';
 
 class Modal extends Component {
     render() {
@@ -13,35 +12,32 @@ class Modal extends Component {
             float: 'none'
         };
 
+        const { avatar, logo, date, name, facility, location } = this.props.event;
+
         return (
-            <div className="modalShadow" onClick={this.props.onClose}>
-                <div className="modalBody">
-                    <div className="container">
-                        <div className="row">
-                            <div className="event">
-                                <div className="eventAvatar col-xs-12" style={eventAvatar}>
-                                    <img className="avatar" src={this.props.event.avatar}/>
+            <div className="modal-shadow" onClick={this.props.onClose}>
+                <div className="modal-body">
+                    <div className="row">
+                        <div className="col s12">
+                            <div className="card">
+                                <div className="card-image">
+                                    <img src={avatar} />
                                 </div>
-                                <div className="eventCard col-xs-12" style={eventCard}>
-                                    <div className="eventCardTop">
-                                        <span className="company"><img className="companyLogo" src={this.props.event.logo}/>
-                                        </span>
-                                    </div>
-                                    <div className="eventCardMiddle">
-                                        <span className="eventDate">{this.props.event.date}</span>
-                                        <span className="eventSpeaker">{this.props.event.name}</span>
-                                    </div>
-                                    <div className="eventCardFooter">
-                                        <span className="eventFacility">{this.props.event.facility}</span>
-                                        <span className="eventLocation">{this.props.event.location}</span>
-                                    </div>
+                                <div className="card-content">
+                                    <img className="company-logo" src={logo} />
+                                    <span className="card-title">{date}</span>
+                                    <p className="event-name">{name}</p>
+                                </div>
+                                <div className="card-action">
+                                    <span className="event-facility">{facility}</span>
+                                    <span className="event-location right">{location}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-    );
+        );
     }
 }
 
