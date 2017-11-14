@@ -2,9 +2,13 @@ import React from 'react';
 import EventCSS from './event.css';
 
 export default (props) => {
+    const backgroundImage = {
+        background: `url(${props.event.avatar})`
+    }
     return (
         <div className="col s12 m7">
             <div className="card horizontal hoverable">
+                <div style={backgroundImage} className="background-image"></div>
                 <div className="card-image hide-on-small-only">
                     <img src={props.event.avatar}/>
                 </div>
