@@ -8,7 +8,6 @@
     perspective: 800px!important;
     transform-origin: 50% 0%;
     transform: scale(1.6);
-    overflow: visible;
     margin: auto;
     width: 50%;
 }
