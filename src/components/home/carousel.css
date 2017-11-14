@@ -66,5 +66,7 @@ nav {
 @media (max-width: 768px) {
     .carousel {
         transform: scale(1);
+        overflow: hidden;
+        width: 100%;
     }
 }
