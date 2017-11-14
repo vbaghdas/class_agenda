@@ -6,8 +6,10 @@
 
 .carousel {
     perspective: 800px!important;
-    transform: scale(1.6) translate(-20%);
-    margin: 15vh auto;
+    transform-origin: 50% 0%;
+    transform: scale(1.6);
+    overflow: visible;
+    margin: auto;
     width: 50%;
 }
 
@@ -64,7 +66,5 @@ nav {
 @media (max-width: 768px) {
     .carousel {
         transform: scale(1);
-        margin: 0 auto;
-        width: 100%;
     }
 }
