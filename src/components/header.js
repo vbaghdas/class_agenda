@@ -7,7 +7,7 @@ import logo from '../assets/images/lfz_logo.png';
 
 export default () => (
 <nav>
-    <div className="nav-wrapper grey darken-4">
+    <div className="nav-wrapper">
         <Link to="/" className="brand-logo">
             <img className="nav-logo" src={logo}/>
         </Link>

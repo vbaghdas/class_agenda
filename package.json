@@ -1,5 +1,5 @@
 {
-  "name": "LFZ_Calendar",
+  "name": "class_agenda",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "bundle": "node_modules/.bin/webpack --config webpack.deploy.config.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Vache Baghdassarian, Jen Hao, Carlos Blandino",
+  "author": "Vache Baghdassarian",
   "license": "ISC",
   "repository": {
     "type": "git",

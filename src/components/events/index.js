@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EventRow from './eventRow';
+import EventRow from './event_row';
 import EventCSS from './event.css';
 import {connect} from 'react-redux';
 import { setGestureCallback, enableGesture } from '../../actions';
@@ -25,7 +25,6 @@ class Events extends Component {
 
     getRows(){
         const {eventList} = this.props;
-        console.log(eventList);
         const rows = [];
         if(eventList){
             var i = 0;
@@ -49,7 +48,7 @@ class Events extends Component {
     };
 }
 
-const mapStateToProps= state => {
+const mapStateToProps = state => {
     return{
         eventList: state.eventList.eventList
     };

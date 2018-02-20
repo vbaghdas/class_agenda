@@ -122,7 +122,7 @@ class Gamepad extends Component{
     }
 
     drawBackground(){
-        this.ctx.fillStyle = "black";
+        this.ctx.fillStyle = "#191919";
         this.ctx.fillRect(0, 0, this.width, this.height);
         this.ctx.fillStyle = "#5cb7d6";
         this.ctx.font = "30px Arial";
@@ -163,7 +163,8 @@ class Gamepad extends Component{
     render(){
         const canvas = {
             margin: '30px auto',
-            width: '100%'
+            width: '100%',
+            opacity: '.9'
         }
 
         return (

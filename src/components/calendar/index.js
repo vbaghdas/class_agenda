@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Modal from './modal';
-import CalDay from './calDay';
+import CalDay from './cal_day';
 import CalendarCSS from './calendar.css';
 import { connect } from 'react-redux';
 import { setGestureCallback, enableGesture, changeGestureMode } from '../../actions';

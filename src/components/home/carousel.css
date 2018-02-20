@@ -14,7 +14,7 @@
 }
 
 .carousel-item {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(25, 25, 25, .9);
     text-align: center;
 }
 
@@ -38,7 +38,7 @@
 
 /* NavBar */
 nav {
-    background-color: #212121!important;
+    background-color: #4887a9!important;
 }
 .nav-wrapper {
     z-index: 1;
@@ -50,11 +50,11 @@ nav {
 }
 
 .nav-wrapper li a:hover {
-    color: #5cb7d6;
+    color: #191919;
 }
 
 .nav-wrapper li a.active {
-    color: #5cb7d6;
+    color: #191919;
     background: rgba(0, 0, 0, 0.2);
 }
 

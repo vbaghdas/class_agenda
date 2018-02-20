@@ -12,18 +12,35 @@ tr {
     width: 70%;
 }
 
+.calendar-container 
+.grey-text {
+    color: #191919!important;
+}
+
 .calendar-month-row {
     font-size: 28px;
-    color: #5cb7d6;
+    color: #fff;
     justify-content: center;
     margin-top: 5px;
 }
 
+.calendar-month-row > 
+td:nth-child(2) {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
 .calendar-month-row .arrow {
-    margin: 0 5px 0 5px;
+    margin: 0;
     font-size: 40px;
-    color: #5cb7d6;
+    color: #fff;
     cursor: pointer;
+}
+
+.calendar-month-row .arrow:hover {
+    transform: scale(1.4);
+    transition: all 0.3s ease-in-out;
 }
 
 .calendar-header {
@@ -34,11 +51,12 @@ tr {
 }
 
 .calendar-day {
-    padding: 12px;
+    padding: 6px 6px;
     width: 10vw;
     height: 7vw;
-    border: solid rgba(34, 34, 34, 0.9) 3px;
-    background-color: rgba(0, 0, 0, 0.9);
+    border: solid rgba(255, 255, 255, .2) 3px;
+    background-color: rgba(25, 25, 25, .9)!important;
+    border-radius: 0;
 }
 
 .calendar-day .avatar {
@@ -77,6 +95,6 @@ tr {
         width: 14vw;
         height: 11vw;
         font-size: 5.25vw;
-        border: solid rgba(34, 34, 34, 0.9) 5px;
+        border: solid rgba(255, 255, 255, .2) 1px;
     }
 }
