@@ -20,4 +20,4 @@ This user-interactive application was built for Learning Fuze (Web Development S
 > 6. Open a browser and navigate to `localhost:3000`
 
 ##### DEMO IMAGE: 
-![alt text](/demon_image.png "Class Agenda")
+![alt text](/demo_image.png "Class Agenda")
