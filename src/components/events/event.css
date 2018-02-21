@@ -45,8 +45,16 @@
     color: #ffab40;
 }
 
-@media (max-width: 600px) {
-    .background-image {
+.background-image-on-landscape {
+    background-size: 150%!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    width: 100%;
+    height: 228px;
+}
+
+@media (max-width: 991px) {
+    .background-image-on-portrait {
         background-size: 125% !important;
         background-repeat: no-repeat!important;
         background-position: center!important;
@@ -56,5 +64,11 @@
         width: 100%;
         height: 100%;
         opacity: 0.2;
+    }
+}
+
+@media (max-width: 768px) {
+    .background-image-on-landscape {
+        display: none;
     }
 }

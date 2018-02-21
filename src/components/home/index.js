@@ -91,7 +91,7 @@ class Home extends Component{
                     <Link to="/calendar"><i className="fa fa-calendar"></i></Link>
                 </div>
                 <div className="carousel-item" onClick={() => this.setLocation(2)}>
-                    <Link to="/gamepad"><i className="fa fa-gamepad"></i></Link>
+                    <Link to="/start_game"><i className="fa fa-gamepad"></i></Link>
                 </div>
                 <div className="carousel-item" onClick={() => this.setLocation(3)}>
                     <Link to="/about"><i className="fa fa-users"></i></Link>

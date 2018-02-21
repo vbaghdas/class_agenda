@@ -11,6 +11,7 @@ import Events from './events';
 import Calendar from './calendar';
 import About from './about';
 import Gamepad from './gamepad';
+import StartGame from './gamepad/start_game';
 
 class App extends Component {
     render() {
@@ -25,6 +26,7 @@ class App extends Component {
                 <Route path="/calendar" component={Calendar} />
                 <Route path="/about" component={About} />
                 <Route path="/gamepad" component={Gamepad} />
+                <Route path="/start_game" component={StartGame} />
             </div>
         )
     }

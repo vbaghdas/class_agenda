@@ -9,9 +9,9 @@ export default (props) => {
     return (
         <div className="col s12 m7">
             <div className="card horizontal hoverable">
-                <div style={backgroundImage} className="background-image"></div>
-                <div className="card-image hide-on-small-only">
-                    <img src={props.event.avatar}/>
+                <div style={backgroundImage} className="background-image-on-portrait"></div>
+                <div style={backgroundImage} className="card-image hide-on-med-only background-image-on-landscape">
+                    {/* <img src={props.event.avatar}/> */}
                 </div>
                 <div className="card-stacked">
                     <div className="card-content">

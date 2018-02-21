@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { enableGesture, enableGameMode, setGestureCallback } from '../../actions'
 import Paddle from './paddle';
 import Ball from './ball';
+import GamePadCSS from './gamepad.css';
 
 class Gamepad extends Component{
     constructor(props){
@@ -138,7 +139,7 @@ class Gamepad extends Component{
 
         let playerOption = {
             x: this.side,
-            y: this.height/2,
+            y: this.height/2 - 75,
             width: 25,
             height: 150,
             ctx: this.ctx
@@ -161,15 +162,9 @@ class Gamepad extends Component{
     }
 
     render(){
-        const canvas = {
-            margin: '30px auto',
-            width: '100%',
-            opacity: '.9'
-        }
-
         return (
             <div className="container" onMouseMove={this.onMouseMove}>
-                <canvas style={canvas} ref="canvas" width={this.width} height={this.height} />
+                <canvas className="canvas" ref="canvas" width={this.width} height={this.height} />
             </div>
         );
     }

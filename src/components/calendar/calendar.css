@@ -32,10 +32,11 @@ td:nth-child(2) {
 }
 
 .calendar-month-row .arrow {
-    margin: 0;
     font-size: 40px;
     color: #fff;
     cursor: pointer;
+    margin: 0;
+    padding: 15px 0;
 }
 
 .calendar-month-row .arrow:hover {
@@ -53,7 +54,7 @@ td:nth-child(2) {
 .calendar-day {
     padding: 6px 6px;
     width: 10vw;
-    height: 7vw;
+    height: 6.9vw;
     border: solid rgba(255, 255, 255, .2) 3px;
     background-color: rgba(25, 25, 25, .9)!important;
     border-radius: 0;
