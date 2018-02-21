@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 import GoogleCalendar from './google_calendar';
-import LeapMotion from './leapmotion';
+// import LeapMotion from './leapmotion';
 import Background from './background';
 import Header from './header';
 
@@ -18,7 +18,7 @@ class App extends Component {
         return (
             <div>
                 <GoogleCalendar />
-                <LeapMotion />
+                {/* <LeapMotion /> */}
                 <Background />
                 <Header />
                 <Route exact path="/" component={Home} />
