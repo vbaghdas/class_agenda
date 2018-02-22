@@ -7,7 +7,7 @@ export default () => {
         <div className="container start-game-container">
             <div className="start-game-wrap">
                 <Link to="/gamepad">
-                    <h1 className="fadeIn">Start Game</h1>
+                    <h1 className="fadeIn">START GAME</h1>
                 </Link>
             </div>
         </div>
